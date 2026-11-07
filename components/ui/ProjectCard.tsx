@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { BRANDS, Brandmark, type BrandId } from "./Brandmark";
 import { CardVideo } from "./CardVideo";
+import { Icon } from "./Icon";
 import { Pill } from "./Pill";
 import { PixelBlock } from "./PixelBlock";
 
@@ -73,6 +74,9 @@ export function ProjectCard({
       </div>
       <Pill className="lds-card__label" mark={<Brandmark brand={brand} size={24} />}>
         <span className="lds-card__product">{title}</span>
+        <span className="lds-card__arrow" aria-hidden="true">
+          <Icon name="arrowUpRight" size={16} />
+        </span>
       </Pill>
     </Link>
   );
