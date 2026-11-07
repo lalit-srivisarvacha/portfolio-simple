@@ -158,8 +158,11 @@
   left: var(--space-3);
   bottom: var(--space-3);
   max-width: calc(100% - 2 * var(--space-3));
+  height: var(--control-h-sm);
   box-shadow: none;
 }
+/* Brandmark reads at 24px; the 4px inset matches the pill's left padding. */
+.lds-card__label .lds-pill__icon { width: 24px; height: 24px; }
 .lds-card__company { flex: none; }
 .lds-card__product {
   min-width: 0;
