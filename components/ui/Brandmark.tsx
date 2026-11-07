@@ -11,12 +11,17 @@ type BrandSpec = {
   viewBox?: string;
   path?: string;
   evenOdd?: boolean;
+  /** Raster mark in /public, for a company with no SVG. Its own background must match `bg`. */
+  src?: string;
+  /** Hairline ring, for a well too close to the chip's color to read as a circle. */
+  ring?: boolean;
 };
 
 /**
  * The companies whose work is on the site. Brand colors live here and nowhere else,
  * the same way accent-warm stays inside PixelBlock. Paths are the companies' own marks;
- * never redraw one. A brand without a path shows its initial until the SVG arrives.
+ * never redraw one. A company with no SVG uses its supplied image (`src`); with neither,
+ * its initial shows.
  */
 export const BRANDS = {
   simpleclosure: {
@@ -49,16 +54,18 @@ export const BRANDS = {
     bg: "#F7F7F7",
     ink: "#2A2B31",
     scale: 0.6,
+    ring: true,
     viewBox: "0 0 37 23",
     evenOdd: true,
     path: "M0.801347 1.89365C4.2594 8.12655 10.8915 11.9983 18.116 11.9983C25.3531 11.9983 31.9938 8.11615 35.4466 1.86577C35.786 1.25182 35.5549 0.486812 34.9295 0.153582C34.304 -0.179648 33.5247 0.0472623 33.1852 0.661212C30.1829 6.096 24.4093 9.47305 18.116 9.47305C11.8359 9.47305 6.06768 6.10637 3.06004 0.686492C2.72058 0.0751423 1.94126 -0.151768 1.31583 0.181462C0.691054 0.514692 0.461882 1.2797 0.801347 1.89365ZM3.06533 11.0589C3.4398 11.3286 3.78388 11.573 4.12071 11.8122C4.45225 12.0475 4.77718 12.2783 5.11797 12.524C5.14901 12.5467 5.15891 12.5895 5.1358 12.6226C5.00833 12.795 4.86304 12.9915 4.70717 13.2035L4.70585 13.2048L4.70387 13.2074C3.9338 14.2499 2.89559 15.6554 2.41942 16.2972C2.22129 16.565 1.9307 16.7465 1.5985 16.8126C0.831727 16.9617 0.101284 16.4385 0.00882228 15.6787V15.6761C-0.0294831 15.3481 0.0576946 15.0194 0.255826 14.7516C0.827104 13.9815 2.216 12.1046 2.97815 11.0718C2.99862 11.0433 3.03759 11.0407 3.06533 11.0589ZM10.8605 15.1296C11.2422 15.2502 11.6167 15.3688 12.011 15.4966C12.0493 15.5089 12.0704 15.5471 12.0572 15.5847C11.6609 16.7841 10.9305 18.9942 10.6293 19.9038C10.5263 20.2169 10.305 20.4821 10.0118 20.6435C9.33024 21.0169 8.46837 20.742 8.14409 20.0477V20.0451C8.0054 19.7443 7.98427 19.4059 8.08729 19.0901C8.38845 18.1838 9.1189 15.9789 9.5178 14.764C9.52771 14.7309 9.56139 14.716 9.59507 14.7264C10.0455 14.8709 10.4569 15.0012 10.8605 15.1296ZM24.4351 15.4278C24.8816 15.2878 25.2884 15.1568 25.6873 15.0285C26.0717 14.9046 26.4494 14.7828 26.8483 14.6576C26.8866 14.6453 26.9283 14.6654 26.9382 14.7004C27.2611 15.6709 27.8027 17.3066 28.1567 18.3757C28.2392 18.6253 28.3119 18.8444 28.3687 19.0162C28.4717 19.3294 28.4512 19.6704 28.3119 19.9712C27.985 20.6681 27.1231 20.9411 26.4442 20.567L26.4415 20.5644C26.1483 20.403 25.9297 20.1404 25.824 19.8247C25.5255 18.9183 24.795 16.7134 24.3909 15.4985C24.3836 15.4706 24.4041 15.4382 24.4351 15.4278ZM32.4284 11.5885C32.0671 11.8472 31.7006 12.1104 31.2937 12.3976C31.268 12.4177 31.2601 12.4534 31.2786 12.4832C32.0453 13.516 33.4322 15.3902 34.0029 16.163C34.1983 16.4308 34.4916 16.6123 34.8211 16.6784H34.8238C35.5879 16.8275 36.321 16.3043 36.4135 15.5445C36.4518 15.2158 36.3646 14.8878 36.1665 14.62C35.5952 13.8472 34.2036 11.9659 33.4468 10.948C33.4237 10.9149 33.3801 10.9104 33.3464 10.9331C33.0307 11.1561 32.7315 11.3714 32.4284 11.5885ZM18.2613 16.2311C17.8459 16.2324 17.4219 16.2337 16.9583 16.2311C16.9246 16.2311 16.8962 16.2564 16.8962 16.2914C16.8982 17.2049 16.8975 18.648 16.8969 19.7456C16.8969 20.1838 16.8962 20.5676 16.8962 20.8399C16.8936 21.1686 17.0224 21.4863 17.2489 21.7288L17.2515 21.7314C17.7819 22.2947 18.6873 22.2947 19.217 21.7314C19.4462 21.4889 19.5723 21.1732 19.5723 20.8425C19.5723 19.8856 19.5723 17.5621 19.5697 16.3018C19.5697 16.2616 19.536 16.2311 19.4977 16.2311C19.0737 16.2285 18.6715 16.2298 18.2613 16.2311Z",
   },
   gojilabs: {
     name: "Goji Labs",
-    bg: "#D65362",
-    ink: "#FEFFFB",
-    scale: 0.5,
-    // [GOJI LABS SVG] — initial shows until the mark is added.
+    bg: "#ED0044",
+    ink: "#FFFFFF",
+    // The supplied 447px image: mark spans 75% of it, so 0.8 sets the mark near 0.6 like the others.
+    scale: 0.8,
+    src: "/brandmarks/gojilabs.jpg",
   },
 } satisfies Record<string, BrandSpec>;
 
@@ -85,7 +92,7 @@ export function Brandmark({ brand, size = 24, labelled, className }: BrandmarkPr
 
   return (
     <span
-      className={["lds-brandmark", className].filter(Boolean).join(" ")}
+      className={["lds-brandmark", spec.ring && "lds-brandmark--ring", className].filter(Boolean).join(" ")}
       style={style}
       role={labelled ? "img" : undefined}
       aria-label={labelled ? spec.name : undefined}
@@ -95,6 +102,9 @@ export function Brandmark({ brand, size = 24, labelled, className }: BrandmarkPr
         <svg viewBox={spec.viewBox} focusable="false">
           <path d={spec.path} fillRule={spec.evenOdd ? "evenodd" : undefined} clipRule={spec.evenOdd ? "evenodd" : undefined} />
         </svg>
+      ) : spec.src ? (
+        // eslint-disable-next-line @next/next/no-img-element -- 24–96px mark, no optimization needed
+        <img src={spec.src} alt="" width={size} height={size} />
       ) : (
         <span className="lds-brandmark__initial">{spec.name.charAt(0)}</span>
       )}
