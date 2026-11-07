@@ -18,17 +18,15 @@ export default function Page() {
     <CasePage>
       <CaseHero
         title="Returning funds back to investors"
-        summary={summary}
         tags={["Product design", "Web app", "Fintech"]}
         meta={[
           { label: "Role", value: "[Lead product designer]" },
-          { label: "Team", value: "[PM, engineers, legal / ops partners]" },
           { label: "Timeline", value: "[YEAR]" },
           { label: "Company", value: "SimpleClosure" },
         ]}
       />
 
-      <Figure wide caption="[Hero shot: the distribution flow a founder sees.]" seed={11} aspect="16 / 9" />
+      <Figure caption="[Hero shot: the distribution flow a founder sees.]" seed={11} aspect="16 / 9" />
 
       <Section title="The problem">
         <p>
