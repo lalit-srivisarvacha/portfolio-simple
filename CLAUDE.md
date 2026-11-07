@@ -22,7 +22,7 @@ Personal portfolio for Lalit, Senior Product Designer (Los Angeles). Next.js App
 ## Layout
 
 - Home: `app/page.tsx`. Left column `components/site/Sidebar.tsx` is sticky, `100dvh`, `overflow: hidden` — it must not scroll on desktop. Right column is a stack of `ProjectCard`s. Below 960px everything stacks.
-- Case studies are **hand-coded pages**: one folder per project at `app/work/<slug>/page.tsx`, built from `components/case/Case.tsx` (`CasePage`, `CaseHero`, `Section`, `Figure`, `Outcomes`). `app/work/project-01` is the template. `app/work/[slug]` is only a stub for projects not written yet.
+- Case studies are **hand-coded pages**: one folder per project at `app/work/<slug>/page.tsx`, built from `components/case/Case.tsx` (`CasePage`, `CaseHero`, `Section`, `Figure`, `Outcomes`). `app/work/project-01` is the template. On desktop (960px+) a sticky side nav (`components/case/CaseToc.tsx`) lists anchor links to the hero ("Overview") and every `Section`, read from the page — a new `Section` appears there automatically; pass `nav` for a shorter label. `app/work/[slug]` is only a stub for projects not written yet.
 - Project list and site copy live in `content/site.ts`. Add a project there first, then its page.
 
 ## Components (`components/ui`)
