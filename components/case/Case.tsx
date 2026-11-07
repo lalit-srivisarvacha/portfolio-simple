@@ -45,9 +45,6 @@ export function CasePage({ children }: { children: ReactNode }) {
         </div>
       </main>
       <footer className={styles.footer}>
-        <Link href="/" className="link body-sm">
-          ← All work
-        </Link>
         <span className="mono-sm subtle">© {site.year} {site.name.toUpperCase()}</span>
       </footer>
     </div>

@@ -1,4 +1,6 @@
 .page {
+  /* Side gutter shared by the floating nav and the side nav on desktop. */
+  --case-gutter: var(--space-6);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,8 +12,8 @@
 .nav {
   position: fixed;
   top: var(--space-4);
-  left: var(--space-4);
-  right: var(--space-4);
+  left: var(--case-gutter);
+  right: var(--case-gutter);
   z-index: 10;
   display: flex;
   align-items: flex-start;
@@ -76,7 +78,7 @@
   right: calc(-1 * var(--space-1));
   width: max-content;
   min-width: 280px;
-  max-width: calc(100vw - 2 * var(--space-4));
+  max-width: calc(100vw - 2 * var(--case-gutter));
   max-height: calc(100dvh - 96px);
   overflow-y: auto;
   padding: var(--space-2);
@@ -142,7 +144,7 @@
 .toc { display: none; }
 
 /* Desktop: three columns. The side nav sits in the left gutter, its edge
-   lined up with the Home pill (both at space-4 from the viewport edge);
+   lined up with the Home pill (both at --case-gutter from the viewport edge);
    the matching right gutter keeps the content centered on the page. */
 @media (min-width: 960px) {
   .main {
@@ -151,8 +153,8 @@
     grid-template-columns: minmax(var(--toc-w), 1fr) minmax(0, var(--measure)) minmax(var(--toc-w), 1fr);
     column-gap: var(--space-6);
     align-items: start;
-    padding-left: var(--space-4);
-    padding-right: var(--space-4);
+    padding-left: var(--case-gutter);
+    padding-right: var(--case-gutter);
   }
   .toc {
     display: block;
@@ -264,7 +266,7 @@
   margin-top: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: var(--space-5);
   border-top: 1px solid var(--hairline);
 }
@@ -272,6 +274,7 @@
 @media (max-width: 639px) {
   .main { --case-top: calc(var(--space-8) + var(--space-4)); padding: var(--case-top) var(--space-4) var(--space-8); }
   .content { gap: var(--space-7); }
-  .nav { top: var(--space-3); left: var(--space-3); right: var(--space-3); }
+  .page { --case-gutter: var(--space-3); }
+  .nav { top: var(--space-3); }
   .outcomes { grid-template-columns: 1fr; }
 }
