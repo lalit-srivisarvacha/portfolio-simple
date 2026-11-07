@@ -28,7 +28,6 @@ export default async function Page({ params }: PageProps<"/work/[slug]">) {
     <CasePage>
       <CaseHero
         title={p.title}
-        summary={p.summary}
         meta={[
           { label: "Role", value: "[ROLE]" },
           { label: "Timeline", value: "[YEAR]" },

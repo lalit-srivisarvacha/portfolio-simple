@@ -18,11 +18,9 @@ export default function Page() {
     <CasePage>
       <CaseHero
         title="Project 01"
-        summary="[One line on what this work changed — the outcome, not the artifact. e.g. Cut onboarding from 9 steps to 3.]"
         tags={["Product design", "iOS"]}
         meta={[
           { label: "Role", value: "Lead product designer" },
-          { label: "Team", value: "[PM, 2 engineers, researcher]" },
           { label: "Timeline", value: "2024 — 2025" },
           { label: "Company", value: "[COMPANY]" },
         ]}
