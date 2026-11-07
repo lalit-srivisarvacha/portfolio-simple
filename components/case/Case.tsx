@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { Icon, Pill, PixelBlock, ThemeToggle } from "@/components/ui";
 import { site } from "@/content/site";
 import { CaseSwitcher } from "./CaseSwitcher";
+import { CaseToc } from "./CaseToc";
 import styles from "./Case.module.css";
 
 /* ───────────────────────────────────────────────────────────────
@@ -10,6 +11,17 @@ import styles from "./Case.module.css";
    (app/work/<slug>/page.tsx) assembled from these, so every story
    can have its own shape while sharing one rhythm.
    ─────────────────────────────────────────────────────────────── */
+
+const CONTENT_ID = "case-content";
+
+/** Turns a section title into a stable anchor id: "What I did" → "what-i-did". */
+function slugify(text: string) {
+  return text
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 
 export function CasePage({ children }: { children: ReactNode }) {
   return (
@@ -26,11 +38,13 @@ export function CasePage({ children }: { children: ReactNode }) {
           <ThemeToggle />
         </div>
       </nav>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.main}>
+        <CaseToc contentId={CONTENT_ID} />
+        <div id={CONTENT_ID} className={styles.content}>
+          {children}
+        </div>
+      </main>
       <footer className={styles.footer}>
-        <Link href="/" className="link body-sm">
-          ← All work
-        </Link>
         <span className="mono-sm subtle">© {site.year} {site.name.toUpperCase()}</span>
       </footer>
     </div>
@@ -41,17 +55,16 @@ type Meta = { label: string; value: string };
 
 export function CaseHero({
   title,
-  summary,
   meta,
   tags,
 }: {
   title: string;
-  summary: string;
   meta: Meta[];
   tags?: string[];
 }) {
   return (
-    <header className={styles.hero}>
+    <header id="overview" data-toc="Overview" className={styles.hero}>
+      <h1 className="title">{title}</h1>
       {tags && tags.length > 0 && (
         <div className={styles.tags}>
           {tags.map((t) => (
@@ -61,8 +74,6 @@ export function CaseHero({
           ))}
         </div>
       )}
-      <h1 className="title">{title}</h1>
-      <p className="body-lg muted">{summary}</p>
       <dl className={styles.meta}>
         {meta.map((m) => (
           <div key={m.label}>
@@ -75,10 +86,24 @@ export function CaseHero({
   );
 }
 
-/** A titled chunk of the story. Sections are space-8 apart. */
-export function Section({ title, children }: { title: string; children: ReactNode }) {
+/**
+ * A titled chunk of the story. Sections are space-8 apart. Each one gets an
+ * anchor and a link in the side nav; pass `nav` for a shorter link label,
+ * or `id` to pin the anchor if the title might change.
+ */
+export function Section({
+  title,
+  nav,
+  id,
+  children,
+}: {
+  title: string;
+  nav?: string;
+  id?: string;
+  children: ReactNode;
+}) {
   return (
-    <section className={styles.section}>
+    <section id={id ?? slugify(title)} data-toc={nav ?? title} className={styles.section}>
       <h2 className="heading">{title}</h2>
       <div className={styles.prose}>{children}</div>
     </section>
@@ -86,24 +111,22 @@ export function Section({ title, children }: { title: string; children: ReactNod
 }
 
 /**
- * An image (or any media) in a radius-md well. `wide` breaks out of the
- * 720px measure to content-max. Falls back to a pixel-block placeholder.
+ * An image (or any media) in a radius-md well, the full width of the
+ * content column. Falls back to a pixel-block placeholder.
  */
 export function Figure({
   children,
   caption,
-  wide,
   seed = 5,
   aspect = "3 / 2",
 }: {
   children?: ReactNode;
   caption?: string;
-  wide?: boolean;
   seed?: number;
   aspect?: string;
 }) {
   return (
-    <figure className={[styles.figure, wide && styles.wide].filter(Boolean).join(" ")}>
+    <figure className={styles.figure}>
       <div className={styles.well} style={{ aspectRatio: aspect }}>
         {children ?? <PixelBlock cols={32} rows={12} density={0.3} seed={seed} style={{ height: "100%", alignContent: "center" }} />}
       </div>
