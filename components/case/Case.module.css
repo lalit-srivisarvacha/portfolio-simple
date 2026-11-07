@@ -231,13 +231,35 @@
 
 .figure { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
 .well {
+  position: relative;
   width: 100%;
   border-radius: var(--radius-md);
   background: var(--bg-surface);
   overflow: hidden;
 }
 .well img, .well video { display: block; width: 100%; height: 100%; object-fit: cover; }
-.well.contain img, .well.contain video { object-fit: contain; }
+
+/* A product shot laid on the well: centered at its own shape, inset so the
+   grey shows around it, the way ProjectCard places one. Container units fit
+   it to whichever side of the stage runs out first. */
+.stage {
+  position: absolute;
+  inset: var(--space-7);
+  container-type: size;
+  display: grid;
+  place-items: center;
+}
+.well .stage video,
+.well .stage img {
+  width: min(100cqw, 100cqh * var(--shot-ratio));
+  height: auto;
+  aspect-ratio: var(--shot-ratio);
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  outline: 1px solid var(--hairline);
+  outline-offset: -1px;
+}
+.figureRow .stage { inset: var(--space-5); }
 
 .figureRow {
   width: 100%;
@@ -286,4 +308,5 @@
   .page { --case-gutter: var(--space-3); }
   .nav { top: var(--space-3); }
   .outcomes, .figureRow { grid-template-columns: 1fr; }
+  .stage, .figureRow .stage { inset: var(--space-4); }
 }

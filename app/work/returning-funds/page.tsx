@@ -25,9 +25,10 @@ export default function Page() {
         ]}
       />
 
-      <Figure aspect="1280 / 900" caption="The investor distribution hub: amount, status and the two tasks left to claim it.">
+      <Figure caption="The investor distribution hub: amount, status and the two tasks left to claim it.">
         <Video
           {...media("investor-final-f")}
+          size={[1280, 900]}
           label="Investor distribution hub: opens how the amount was calculated, provides bank details after comparing ACH, wire and crypto, signs the release in a full-screen signing view, then the status moves to awaiting transfer and distribution sent"
         />
       </Figure>
@@ -103,9 +104,10 @@ export default function Page() {
         </p>
       </Section>
 
-      <Figure aspect="1440 / 900" caption="Ops uploads the waterfall as a CSV and the investor table fills in.">
+      <Figure caption="Ops uploads the waterfall as a CSV and the investor table fills in.">
         <Video
           {...media("investor-table-v6")}
+          size={[1440, 900]}
           label="Operations downloads the waterfall Google Sheet as a CSV, switches to the SimpleClosure admin tab, and drags the file into the empty investor table; rows load in and a CSV upload successful toast appears"
         />
       </Figure>
@@ -118,15 +120,17 @@ export default function Page() {
       </Section>
 
       <FigureRow>
-        <Figure aspect="640 / 900" caption="Choosing the payment methods investors can use.">
+        <Figure aspect="4 / 5" caption="Choosing the payment methods investors can use.">
           <Video
             {...media("payment-methods-v4")}
+          size={[640, 900]}
             label="Founder selects the payment methods investors can choose from: ACH, crypto with BTC and other tickers, then confirms and the task completes"
           />
         </Figure>
-        <Figure aspect="640 / 900" caption="Reviewing the releases, then signing and sending them all at once.">
+        <Figure aspect="4 / 5" caption="Reviewing the releases, then signing and sending them all at once.">
           <Video
             {...media("review-release-v6")}
+          size={[640, 900]}
             label="Founder opens Sequoia Capital's release agreement, scrolls through it and closes it, then certifies the agreements, signs once and sends every release to investors"
           />
         </Figure>
@@ -141,15 +145,17 @@ export default function Page() {
       </Section>
 
       <FigureRow>
-        <Figure aspect="740 / 863" caption="Each investor moves from signed release to distribution sent.">
+        <Figure aspect="4 / 5" caption="Each investor moves from signed release to distribution sent.">
           <Video
             {...media("tracker")}
+          size={[740, 863]}
             label="Founder view of the recipient tracker: each investor moves from signed release to distribution sent, and the status bar fills in"
           />
         </Figure>
-        <Figure aspect="740 / 863" caption="Paying an investor from their payment instructions.">
+        <Figure aspect="4 / 5" caption="Paying an investor from their payment instructions.">
           <Video
             {...media("tracking-v5")}
+          size={[740, 863]}
             label="An investor signs their release; the founder opens Lilly Allen's payment instructions, copies the bank details, uploads a transfer confirmation, and marks the distribution as paid"
           />
         </Figure>
@@ -164,9 +170,10 @@ export default function Page() {
         </p>
       </Section>
 
-      <Figure aspect="1280 / 832" caption="The first version: sign the release, then enter bank details.">
+      <Figure caption="The first version: sign the release, then enter bank details.">
         <Video
           {...media("investor-v1d")}
+          size={[1280, 832]}
           label="Investor opens their return of funds, reviews and signs the release of claims, then enters bank details for ACH and submits"
         />
       </Figure>
