@@ -12,11 +12,13 @@ export default function Home() {
           <ProjectCard
             key={p.slug}
             title={p.title}
+            company={p.company}
             href={`/work/${p.slug}`}
             image={p.image}
             imageAlt={p.imageAlt}
-            iconSrc={p.iconSrc}
-            padded={p.padded}
+            video={p.video}
+            poster={p.poster}
+            bleed={p.bleed}
             seed={p.seed}
             priority={i < 2}
           />
