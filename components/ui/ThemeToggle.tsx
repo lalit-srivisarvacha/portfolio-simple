@@ -27,7 +27,7 @@ export function useTheme(): [Theme, (t: Theme) => void] {
   return [theme, set];
 }
 
-/** 64×32 pill switch: sun and moon slots, an ink knob under the active theme. Flips data-theme on <html> and persists the choice. */
+/** 60×32 pill switch: sun and moon slots, an ink knob under the active theme. Flips data-theme on <html> and persists the choice. */
 export function ThemeToggle() {
   const [theme, setTheme] = useTheme();
   const dark = theme === "dark";
