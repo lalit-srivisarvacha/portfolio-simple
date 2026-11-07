@@ -28,7 +28,7 @@ export default function Page() {
         ]}
       />
 
-      <Figure wide caption="[Hero shot: the finished product in context.]" seed={3} aspect="16 / 9" />
+      <Figure caption="[Hero shot: the finished product in context.]" seed={3} aspect="16 / 9" />
 
       <Section title="The problem">
         <p>

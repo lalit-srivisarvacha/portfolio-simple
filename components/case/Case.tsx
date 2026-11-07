@@ -117,24 +117,22 @@ export function Section({
 }
 
 /**
- * An image (or any media) in a radius-md well. `wide` breaks out of the
- * 720px measure to content-max. Falls back to a pixel-block placeholder.
+ * An image (or any media) in a radius-md well, the full width of the
+ * content column. Falls back to a pixel-block placeholder.
  */
 export function Figure({
   children,
   caption,
-  wide,
   seed = 5,
   aspect = "3 / 2",
 }: {
   children?: ReactNode;
   caption?: string;
-  wide?: boolean;
   seed?: number;
   aspect?: string;
 }) {
   return (
-    <figure className={[styles.figure, wide && styles.wide].filter(Boolean).join(" ")}>
+    <figure className={styles.figure}>
       <div className={styles.well} style={{ aspectRatio: aspect }}>
         {children ?? <PixelBlock cols={32} rows={12} density={0.3} seed={seed} style={{ height: "100%", alignContent: "center" }} />}
       </div>

@@ -119,12 +119,15 @@
   /* Top of the content column; the side nav sticks at the same line. */
   --case-top: calc(var(--space-8) + var(--space-6));
   width: 100%;
-  max-width: var(--content-max);
-  margin: 0 auto;
   padding: var(--case-top) var(--space-5) var(--space-9);
 }
 
+/* One centered column on the 720px measure. Text and images alike stay
+   inside it; nothing breaks out. */
 .content {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -138,25 +141,29 @@
    an ink bar beside the part being read; no accent, it is navigation. */
 .toc { display: none; }
 
+/* Desktop: three columns. The side nav sits in the left gutter, its edge
+   lined up with the Home pill (both at space-4 from the viewport edge);
+   the matching right gutter keeps the content centered on the page. */
 @media (min-width: 960px) {
   .main {
+    --toc-w: 184px;
     display: grid;
-    grid-template-columns: 200px minmax(0, 1fr);
-    gap: var(--space-8);
+    grid-template-columns: minmax(var(--toc-w), 1fr) minmax(0, var(--measure)) minmax(var(--toc-w), 1fr);
+    column-gap: var(--space-6);
     align-items: start;
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
   }
   .toc {
     display: block;
+    grid-column: 1;
+    width: var(--toc-w);
     position: sticky;
     top: var(--case-top);
     max-height: calc(100dvh - var(--case-top) - var(--space-5));
     overflow-y: auto;
   }
-  /* With the nav on the left, the story reads from a shared left edge. */
-  .content > .hero,
-  .content > .section,
-  .content > .figure,
-  .content > .outcomes { margin-left: 0; margin-right: 0; }
+  .content { grid-column: 2; }
 }
 
 .tocList {
@@ -199,13 +206,7 @@
   .tocLink, .tocLink::before { transition: none; }
 }
 
-/* Everything sits on a 720px measure unless it asks to break out. */
-.hero, .section, .figure, .outcomes {
-  width: 100%;
-  max-width: var(--measure);
-  margin-left: auto;
-  margin-right: auto;
-}
+.hero, .section, .figure, .outcomes { width: 100%; }
 
 .hero { display: flex; flex-direction: column; gap: var(--space-4); }
 .tags { display: flex; gap: var(--space-2); flex-wrap: wrap; }
@@ -227,7 +228,6 @@
 .prose ul { margin: 0; padding-left: 1.2em; }
 
 .figure { margin: 0; display: flex; flex-direction: column; gap: var(--space-3); }
-.figure.wide { max-width: none; }
 .well {
   width: 100%;
   border-radius: var(--radius-md);
