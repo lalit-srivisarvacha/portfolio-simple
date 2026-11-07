@@ -225,7 +225,7 @@
 .meta dd { margin: 0; }
 
 .section { display: flex; flex-direction: column; gap: var(--space-4); }
-.prose { display: flex; flex-direction: column; gap: var(--space-4); color: var(--ink-muted); font-size: 15px; line-height: 25px; }
+.prose { display: flex; flex-direction: column; gap: var(--space-4); color: var(--ink-muted); font-size: 17px; line-height: 28px; }
 .prose strong { color: var(--ink); font-weight: 500; }
 .prose ul { margin: 0; padding-left: 1.2em; }
 
