@@ -255,7 +255,6 @@
   border: 0;
   border-radius: var(--radius-pill);
   background: var(--bg-surface);
-  box-shadow: inset 0 0 0 1px var(--hairline);
   cursor: pointer;
 }
 .lds-toggle__knob {
