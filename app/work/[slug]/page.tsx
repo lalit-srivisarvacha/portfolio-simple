@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CaseHero, CasePage, Figure, Section } from "@/components/case/Case";
+import { CaseHero, CasePage, Chapter, Figure, Section } from "@/components/case/Case";
 import { projects } from "@/content/site";
 
 /*
@@ -34,12 +34,14 @@ export default async function Page({ params }: PageProps<"/work/[slug]">) {
         ]}
       />
       <Figure seed={p.seed} aspect="16 / 9" />
-      <Section title="Case study coming soon">
-        <p>
-          This project is listed but not written up yet. Copy <strong>app/work/project-01</strong> to{" "}
-          <strong>app/work/{p.slug}</strong> to replace this page.
-        </p>
-      </Section>
+      <Chapter title="Coming soon">
+        <Section title="Case study coming soon">
+          <p>
+            This project is listed but not written up yet. Copy <strong>app/work/project-01</strong> to{" "}
+            <strong>app/work/{p.slug}</strong> to replace this page.
+          </p>
+        </Section>
+      </Chapter>
     </CasePage>
   );
 }

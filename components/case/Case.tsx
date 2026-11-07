@@ -88,26 +88,34 @@ export function CaseHero({
 }
 
 /**
- * A titled chunk of the story. Sections are space-8 apart. Each one gets an
- * anchor and a link in the side nav; pass `nav` for a shorter link label,
- * or `id` to pin the anchor if the title might change.
+ * A top-level part of the story: Background, What we built, Results. Each
+ * chapter gets a small labelled header, an anchor and one link in the side
+ * nav, and holds the Sections, Figures and Outcomes that belong to it. Keep
+ * a case study to a handful of chapters so the nav stays short. Pass `id` to
+ * pin the anchor if the title might change.
  */
-export function Section({
-  title,
-  nav,
-  id,
-  children,
-}: {
-  title: string;
-  nav?: string;
-  id?: string;
-  children: ReactNode;
-}) {
+export function Chapter({ title, id, children }: { title: string; id?: string; children: ReactNode }) {
+  const anchor = id ?? slugify(title);
   return (
-    <section id={id ?? slugify(title)} data-toc={nav ?? title} className={styles.section}>
-      <h2 className="heading">{title}</h2>
-      <div className={styles.prose}>{children}</div>
+    <section id={anchor} data-toc={title} aria-labelledby={`${anchor}-title`} className={styles.chapter}>
+      <h2 id={`${anchor}-title`} className={`mono-sm subtle ${styles.chapterTitle}`}>
+        {title.toUpperCase()}
+      </h2>
+      {children}
     </section>
+  );
+}
+
+/**
+ * A titled chunk of the story inside a Chapter. Its heading stays in the
+ * text but it isn't a nav entry; the Chapter is. Sections are space-8 apart.
+ */
+export function Section({ title, id, children }: { title: string; id?: string; children: ReactNode }) {
+  return (
+    <div id={id ?? slugify(title)} className={styles.section}>
+      <h3 className="heading">{title}</h3>
+      <div className={styles.prose}>{children}</div>
+    </div>
   );
 }
 

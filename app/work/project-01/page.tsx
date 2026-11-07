@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { CaseHero, CasePage, Figure, Outcomes, Section } from "@/components/case/Case";
+import { CaseHero, CasePage, Chapter, Figure, Outcomes, Section } from "@/components/case/Case";
 
 /*
  * TEMPLATE — a hand-coded case study.
  * Copy this folder to app/work/<slug>/ for each project and write the story.
- * Keep the shape loose: add or drop Sections and Figures as the work needs.
+ * Group the story into a few Chapters (each is one side-nav link); inside
+ * them, add or drop Sections and Figures as the work needs.
  * Everything in [BRACKETS] is a placeholder.
  */
 
@@ -28,38 +29,44 @@ export default function Page() {
 
       <Figure caption="[Hero shot: the finished product in context.]" seed={3} aspect="16 / 9" />
 
-      <Section title="The problem">
-        <p>
-          [Two or three sentences on what was broken, for whom, and how you knew. Quote a real user or a
-          real number if you have one.]
-        </p>
-      </Section>
+      <Chapter title="Background">
+        <Section title="The problem">
+          <p>
+            [Two or three sentences on what was broken, for whom, and how you knew. Quote a real user or a real number
+            if you have one.]
+          </p>
+        </Section>
+      </Chapter>
 
-      <Section title="What I did">
-        <p>
-          [How you approached it: the constraint you chose to design around, the options you explored, and
-          the one you shipped. Mention the decision you&apos;d defend hardest.]
-        </p>
-        <ul>
-          <li>[Audit / research step]</li>
-          <li>[Exploration and the direction chosen]</li>
-          <li>[Build-out and handoff]</li>
-        </ul>
-      </Section>
+      <Chapter title="What I did">
+        <Section title="[What changed]">
+          <p>
+            [How you approached it: the constraint you chose to design around, the options you explored, and the one you
+            shipped. Mention the decision you&apos;d defend hardest.]
+          </p>
+          <ul>
+            <li>[Audit / research step]</li>
+            <li>[Exploration and the direction chosen]</li>
+            <li>[Build-out and handoff]</li>
+          </ul>
+        </Section>
 
-      <Figure caption="[Before / after, or the key flow.]" seed={9} />
+        <Figure caption="[Before / after, or the key flow.]" seed={9} />
+      </Chapter>
 
-      <Section title="Outcome">
-        <p>[What changed after launch, and what you&apos;d do differently.]</p>
-      </Section>
+      <Chapter title="Results">
+        <Section title="Outcome">
+          <p>[What changed after launch, and what you&apos;d do differently.]</p>
+        </Section>
 
-      <Outcomes
-        items={[
-          { value: "[−66%]", label: "[steps to first value]" },
-          { value: "[+18%]", label: "[activation]" },
-          { value: "[4 wks]", label: "[concept to ship]" },
-        ]}
-      />
+        <Outcomes
+          items={[
+            { value: "[−66%]", label: "[steps to first value]" },
+            { value: "[+18%]", label: "[activation]" },
+            { value: "[4 wks]", label: "[concept to ship]" },
+          ]}
+        />
+      </Chapter>
     </CasePage>
   );
 }
