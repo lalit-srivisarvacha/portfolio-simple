@@ -216,7 +216,7 @@
     opacity 200ms cubic-bezier(0.2, 0, 0, 1),
     transform 200ms cubic-bezier(0.2, 0, 0, 1);
 }
-.lds-card__arrow svg { flex: none; }
+.lds-card__arrow svg { flex: none; width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .lds-card:hover .lds-card__arrow,
 .lds-card:focus-visible .lds-card__arrow {
   width: 16px;
