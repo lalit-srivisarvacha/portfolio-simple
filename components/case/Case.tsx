@@ -18,7 +18,7 @@ export function CasePage({ children }: { children: ReactNode }) {
         <div className={styles.navGroup}>
           <Link href="/" className={styles.navPill}>
             <Icon name="arrowLeft" size={16} />
-            {site.name}
+            Home
           </Link>
         </div>
         <div className={styles.navGroup}>
