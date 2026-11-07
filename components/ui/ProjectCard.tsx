@@ -1,20 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { BRANDS, Brandmark, type BrandId } from "./Brandmark";
 import { CardVideo } from "./CardVideo";
 import { Pill } from "./Pill";
 import { PixelBlock } from "./PixelBlock";
 
-export type ProjectCompany = {
-  name: string;
-  /** Square brandmark (svg or png) in /public, shown in the chip's round well. */
-  logo?: string;
-};
-
 export type ProjectCardProps = {
   /** Product name — the chip's text, next to the company brandmark. */
   title: string;
-  company: ProjectCompany;
+  /** Company the work was for; its brandmark leads the chip. */
+  brand: BrandId;
   href: string;
   /** Product shot in /public, centered in the well at its own aspect ratio. */
   image?: string;
@@ -40,7 +36,7 @@ export type ProjectCardProps = {
  */
 export function ProjectCard({
   title,
-  company,
+  brand,
   href,
   image,
   imageAlt = "",
@@ -54,7 +50,7 @@ export function ProjectCard({
   const hasShot = Boolean(media || video || image);
 
   return (
-    <Link href={href} className="lds-card" aria-label={`${company.name}, ${title}`}>
+    <Link href={href} className="lds-card" aria-label={`${BRANDS[brand].name}, ${title}`}>
       <div className={["lds-card__media", bleed && "lds-card__media--bleed"].filter(Boolean).join(" ")}>
         {hasShot ? (
           <div className="lds-card__stage">
@@ -75,11 +71,7 @@ export function ProjectCard({
           <PixelBlock cols={30} rows={12} density={0.32} seed={seed} style={{ height: "100%", alignContent: "center" }} />
         )}
       </div>
-      <Pill
-        className="lds-card__label"
-        iconSrc={company.logo}
-        monogram={company.logo ? undefined : company.name}
-      >
+      <Pill className="lds-card__label" mark={<Brandmark brand={brand} size={24} />}>
         <span className="lds-card__product">{title}</span>
       </Pill>
     </Link>

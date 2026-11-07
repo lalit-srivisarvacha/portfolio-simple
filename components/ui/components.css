@@ -102,12 +102,38 @@
   overflow: hidden;
 }
 .lds-pill__icon img, .lds-pill__icon svg { width: 100%; height: 100%; display: block; }
-.lds-pill__monogram { font-size: 12px; line-height: 14px; font-weight: 500; color: var(--ink-muted); }
 .lds-pill__dot {
   width: 8px; height: 8px; flex: none;
   border-radius: var(--radius-pill);
   background: var(--accent);
   margin-left: var(--space-2);
+}
+
+/* ---------- Brandmark ---------- */
+/* Brand colors arrive as custom properties from BRANDS; they never leave this element. */
+.lds-brandmark {
+  width: var(--bm-size, 24px);
+  height: var(--bm-size, 24px);
+  flex: none;
+  border-radius: var(--radius-pill);
+  background: var(--bm-bg);
+  color: var(--bm-ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.lds-brandmark svg {
+  width: calc(var(--bm-scale) * 100%);
+  height: calc(var(--bm-scale) * 100%);
+  display: block;
+  fill: currentColor;
+}
+.lds-brandmark__initial {
+  font-family: var(--font-sans);
+  font-size: calc(var(--bm-size, 24px) * 0.5);
+  line-height: 1;
+  font-weight: 500;
 }
 
 /* ---------- ProjectCard ---------- */
@@ -165,8 +191,6 @@
   line-height: 25px;
   letter-spacing: 0;
 }
-/* Brandmark reads at 24px; the 4px inset matches the pill's left padding. */
-.lds-card__label .lds-pill__icon { width: 24px; height: 24px; }
 .lds-card__product {
   min-width: 0;
   overflow: hidden;

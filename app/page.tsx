@@ -12,7 +12,7 @@ export default function Home() {
           <ProjectCard
             key={p.slug}
             title={p.title}
-            company={p.company}
+            brand={p.brand}
             href={`/work/${p.slug}`}
             image={p.image}
             imageAlt={p.imageAlt}

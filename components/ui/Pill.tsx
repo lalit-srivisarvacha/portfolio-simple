@@ -7,8 +7,8 @@ export type PillProps = {
   iconSrc?: string;
   /** Line icon used when there is no iconSrc. */
   icon?: IconName;
-  /** Name whose first letter fills the well when there is no iconSrc or icon. */
-  monogram?: string;
+  /** Any element for the left well, such as a Brandmark. Takes precedence over iconSrc and icon. */
+  mark?: ReactNode;
   /** Accent dot on the left (availability status). */
   dot?: boolean;
   /**
@@ -21,25 +21,22 @@ export type PillProps = {
 };
 
 /** 28px rounded label in `label` type. Never a button. */
-export function Pill({ children, iconSrc, icon, monogram, dot, variant = "float", href, className }: PillProps) {
+export function Pill({ children, iconSrc, icon, mark, dot, variant = "float", href, className }: PillProps) {
   const cls = ["lds-pill", variant !== "float" && `lds-pill--${variant}`, className]
     .filter(Boolean)
     .join(" ");
-  const hasWell = Boolean(iconSrc || icon || monogram);
+  const hasWell = Boolean(mark || iconSrc || icon);
 
   const inner = (
     <>
-      {hasWell && (
+      {mark}
+      {!mark && hasWell && (
         <span className="lds-pill__icon">
           {iconSrc ? (
             // eslint-disable-next-line @next/next/no-img-element -- tiny favicon, no optimization needed
             <img src={iconSrc} alt="" width={20} height={20} />
-          ) : icon ? (
-            <Icon name={icon} size={12} />
           ) : (
-            <span className="lds-pill__monogram" aria-hidden="true">
-              {(monogram!.match(/[\p{L}\p{N}]/u)?.[0] ?? "").toUpperCase()}
-            </span>
+            <Icon name={icon!} size={12} />
           )}
         </span>
       )}

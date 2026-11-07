@@ -1,4 +1,5 @@
 export { Avatar } from "./Avatar";
+export { BRANDS, Brandmark, type BrandId } from "./Brandmark";
 export { Button } from "./Button";
 export { Icon, ICONS, type IconName } from "./Icon";
 export { IconButton } from "./IconButton";
