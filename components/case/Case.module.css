@@ -165,7 +165,21 @@
     max-height: calc(100dvh - var(--case-top) - var(--space-5));
     overflow-y: auto;
   }
-  .content { grid-column: 2; }
+  /* The story spans the center and right columns as a subgrid: text keeps
+     to the centered measure column, while figures start at the same left
+     edge and run on to the right gutter. */
+  .content {
+    grid-column: 2 / -1;
+    max-width: none;
+    margin: 0;
+    display: grid;
+    grid-template-columns: subgrid;
+    column-gap: normal; /* use main's column gap, not the flex gap above */
+    row-gap: var(--space-8);
+  }
+  .content > * { grid-column: 1; }
+  .content > .figure,
+  .content > .figureRow { grid-column: 1 / -1; }
 }
 
 .tocList {
