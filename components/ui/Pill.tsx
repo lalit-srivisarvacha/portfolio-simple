@@ -7,6 +7,8 @@ export type PillProps = {
   iconSrc?: string;
   /** Line icon used when there is no iconSrc. */
   icon?: IconName;
+  /** Any element for the left well, such as a Brandmark. Takes precedence over iconSrc and icon. */
+  mark?: ReactNode;
   /** Accent dot on the left (availability status). */
   dot?: boolean;
   /**
@@ -19,15 +21,16 @@ export type PillProps = {
 };
 
 /** 28px rounded label in `label` type. Never a button. */
-export function Pill({ children, iconSrc, icon, dot, variant = "float", href, className }: PillProps) {
+export function Pill({ children, iconSrc, icon, mark, dot, variant = "float", href, className }: PillProps) {
   const cls = ["lds-pill", variant !== "float" && `lds-pill--${variant}`, className]
     .filter(Boolean)
     .join(" ");
-  const hasWell = Boolean(iconSrc || icon);
+  const hasWell = Boolean(mark || iconSrc || icon);
 
   const inner = (
     <>
-      {hasWell && (
+      {mark}
+      {!mark && hasWell && (
         <span className="lds-pill__icon">
           {iconSrc ? (
             // eslint-disable-next-line @next/next/no-img-element -- tiny favicon, no optimization needed

@@ -1,3 +1,5 @@
+import type { BrandId } from "@/components/ui/Brandmark";
+
 /**
  * Site-wide content. Edit here, not in components.
  * Anything in [BRACKETS] is a placeholder to replace.
@@ -25,20 +27,30 @@ export type Project = {
   title: string;
   /** One line of outcome, used on case-study pages. Say what the work did. */
   summary: string;
-  /** 3:2 image path in /public. Omit for a pixel-block placeholder. */
+  /** Company the work was for: a key of BRANDS in components/ui/Brandmark.tsx. */
+  brand: BrandId;
+  /**
+   * Product shot in /public/work/<slug>/, centered in the card at its own aspect ratio.
+   * Omit image and video for a pixel-block placeholder.
+   */
   image?: string;
+  /** Describes the image or animation for screen readers. */
   imageAlt?: string;
-  iconSrc?: string;
-  padded?: boolean;
+  /** Looping product animation (mp4/webm). Takes the image's place when set. */
+  video?: string;
+  /** Still frame for the video; shown before playback and with reduced motion. */
+  poster?: string;
+  /** Fill the card edge to edge instead of centering the shot. */
+  bleed?: boolean;
   seed?: number;
 };
 
-/** Order here is display order on the home page. */
+/** Order here is display order on the home page. [CHECK] brands are placeholders; match each to its project. */
 export const projects: Project[] = [
-  { slug: "project-01", title: "Project 01", summary: "[One line on what this work changed.]", seed: 11 },
-  { slug: "project-02", title: "Project 02", summary: "[One line on what this work changed.]", seed: 18 },
-  { slug: "project-03", title: "Project 03", summary: "[One line on what this work changed.]", seed: 25 },
-  { slug: "project-04", title: "Project 04", summary: "[One line on what this work changed.]", seed: 32 },
-  { slug: "project-05", title: "Project 05", summary: "[One line on what this work changed.]", seed: 39 },
-  { slug: "project-06", title: "Project 06", summary: "[One line on what this work changed.]", seed: 46 },
+  { slug: "project-01", title: "[Product title]", brand: "simpleclosure", summary: "[One line on what this work changed.]", seed: 11 },
+  { slug: "project-02", title: "[Product title]", brand: "rev", summary: "[One line on what this work changed.]", seed: 18 },
+  { slug: "project-03", title: "[Product title]", brand: "oscar", summary: "[One line on what this work changed.]", seed: 25 },
+  { slug: "project-04", title: "[Product title]", brand: "sleepreset", summary: "[One line on what this work changed.]", seed: 32 },
+  { slug: "project-05", title: "[Product title]", brand: "gojilabs", summary: "[One line on what this work changed.]", seed: 39 },
+  { slug: "project-06", title: "[Product title]", brand: "simpleclosure", summary: "[One line on what this work changed.]", seed: 46 },
 ];

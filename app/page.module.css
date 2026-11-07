@@ -11,13 +11,12 @@
   padding: var(--space-3) var(--space-3) var(--space-3) 0;
   display: flex;
   flex-direction: column;
-  /* space-6 plus the 14px the floating label hangs below each card */
-  gap: 46px;
+  gap: var(--space-6);
 }
 
 @media (max-width: 959px) {
   .work {
     padding: 0 var(--space-3) var(--space-5);
-    gap: 40px;
+    gap: var(--space-5);
   }
 }

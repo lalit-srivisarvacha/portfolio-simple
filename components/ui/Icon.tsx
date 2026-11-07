@@ -3,6 +3,7 @@ import type { SVGProps } from "react";
 /** Lucide-style 24px line icons, 1.5 stroke. Add paths here; never emoji. */
 export const ICONS = {
   arrowUpRight: "M7 17 17 7M7 7h10v10",
+  arrowRight: "M5 12h14M12 5l7 7-7 7",
   arrowLeft: "M19 12H5M12 19l-7-7 7-7",
   mail: "M4 6h16v12H4zM4 7l8 6 8-6",
   sun: "M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",
