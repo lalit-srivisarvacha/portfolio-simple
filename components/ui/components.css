@@ -160,6 +160,10 @@
   max-width: calc(100% - 2 * var(--space-3));
   height: var(--control-h-sm);
   box-shadow: none;
+  /* .body size; company name keeps 500, product title drops to 400 */
+  font-size: 15px;
+  line-height: 25px;
+  letter-spacing: 0;
 }
 /* Brandmark reads at 24px; the 4px inset matches the pill's left padding. */
 .lds-card__label .lds-pill__icon { width: 24px; height: 24px; }
@@ -167,6 +171,7 @@
 .lds-card__product {
   min-width: 0;
   color: var(--ink-muted);
+  font-weight: 400;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
