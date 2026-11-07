@@ -5,11 +5,11 @@
 
 export const site = {
   name: "Lalit",
+  fullName: "Lalit Srivisarvacha",
   role: "Senior Product Designer",
   location: "Los Angeles",
-  email: "hello@example.com", // [EMAIL]
+  email: "lalit93@me.com",
   avatar: undefined as string | undefined, // e.g. "/avatar.jpg" in /public
-  available: true,
   /** Update once a year; a live Date() would make every page dynamic. */
   year: 2026,
   bio: {
@@ -17,12 +17,7 @@ export const site = {
     rest: "Over the last [N] years I've designed web and mobile products for teams from early-stage startups to [COMPANY], with a soft spot for the unglamorous flows people use every day.",
     currentlyAt: { name: "[COMPANY]", href: "#" },
   },
-  previously: ["[COMPANY]", "[COMPANY]", "[COMPANY]"],
-  socials: [
-    { icon: "dribbble", label: "Dribbble", href: "https://dribbble.com/" },
-    { icon: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/" },
-    { icon: "x", label: "X", href: "https://x.com/" },
-  ] as const,
+  linkedin: "https://www.linkedin.com/in/lalit-srivisarvacha/",
 };
 
 export type Project = {

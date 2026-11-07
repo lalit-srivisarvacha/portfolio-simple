@@ -1,4 +1,4 @@
-import { Avatar, Button, IconButton, Pill, ThemeToggle } from "@/components/ui";
+import { Avatar, Button, IconButton, ThemeToggle } from "@/components/ui";
 import { site } from "@/content/site";
 import styles from "./Sidebar.module.css";
 
@@ -11,16 +11,11 @@ export function Sidebar() {
     <aside className={styles.side} aria-label={`About ${site.name}`}>
       <div className={styles.top}>
         <div className={styles.row}>
-          <Avatar src={site.avatar} alt={site.name} initials={site.name[0]} />
-          {site.available && (
-            <Pill variant="flat" dot>
-              Available for work
-            </Pill>
-          )}
+          <Avatar src={site.avatar} alt={site.fullName} initials={site.name[0]} />
         </div>
 
         <div className={styles.intro}>
-          <h1 className="title">{site.name}</h1>
+          <h1 className="title">{site.fullName}</h1>
           <p className={`body-lg muted ${styles.bio}`}>
             {site.bio.lead} {site.bio.rest} Currently at{" "}
             <a className="link" href={site.bio.currentlyAt.href}>
@@ -31,25 +26,21 @@ export function Sidebar() {
         </div>
 
         <div className={styles.actions}>
-          <Button href="#work">View work</Button>
-          <Button href={`mailto:${site.email}`} variant="secondary">
-            Let&apos;s talk
-          </Button>
+          <Button href={`mailto:${site.email}`}>Email me</Button>
+          <IconButton
+            icon="linkedin"
+            label="LinkedIn"
+            href={site.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            filled
+            className={styles.iconAction}
+          />
         </div>
       </div>
 
       <div className={styles.bottom}>
-        <p className="body-sm subtle">Previously at {site.previously.join(" · ")}</p>
-        <div className={styles.row}>
-          <div className={styles.socials}>
-            {site.socials.map((s) => (
-              <IconButton key={s.label} icon={s.icon} label={s.label} href={s.href} target="_blank" rel="noreferrer" />
-            ))}
-            <IconButton icon="mail" label="Email" href={`mailto:${site.email}`} filled />
-          </div>
-          <ThemeToggle />
-        </div>
-        <p className="mono-sm subtle">© {site.year} — {site.location.toUpperCase()}</p>
+        <ThemeToggle />
       </div>
     </aside>
   );
