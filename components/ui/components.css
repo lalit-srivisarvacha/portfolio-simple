@@ -129,6 +129,7 @@
   height: calc(var(--bm-scale) * 100%);
   display: block;
   fill: currentColor;
+  transform: translateY(calc(var(--bm-y, 0) * var(--bm-size, 24px)));
 }
 /* Same hairline ring as IconButton: just enough to outline a near-white well on bg-raised. */
 .lds-brandmark--ring { box-shadow: inset 0 0 0 1px var(--hairline); }
