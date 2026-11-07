@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon, Pill, PixelBlock, ThemeToggle } from "@/components/ui";
+import { CardVideo } from "@/components/ui/CardVideo";
 import { site } from "@/content/site";
 import { CaseSwitcher } from "./CaseSwitcher";
 import { CaseToc } from "./CaseToc";
@@ -112,27 +113,43 @@ export function Section({
 
 /**
  * An image (or any media) in a radius-md well, the full width of the
- * content column. Falls back to a pixel-block placeholder.
+ * content column. Falls back to a pixel-block placeholder. `contain` shows
+ * the whole frame on the surface tint instead of cropping (tall screens).
  */
 export function Figure({
   children,
   caption,
   seed = 5,
   aspect = "3 / 2",
+  contain,
 }: {
   children?: ReactNode;
   caption?: string;
   seed?: number;
   aspect?: string;
+  contain?: boolean;
 }) {
   return (
     <figure className={styles.figure}>
-      <div className={styles.well} style={{ aspectRatio: aspect }}>
+      <div className={[styles.well, contain && styles.contain].filter(Boolean).join(" ")} style={{ aspectRatio: aspect }}>
         {children ?? <PixelBlock cols={32} rows={12} density={0.3} seed={seed} style={{ height: "100%", alignContent: "center" }} />}
       </div>
       {caption && <figcaption className="body-sm subtle">{caption}</figcaption>}
     </figure>
   );
+}
+
+/** Two Figures side by side; stacks on phones. */
+export function FigureRow({ children }: { children: ReactNode }) {
+  return <div className={styles.figureRow}>{children}</div>;
+}
+
+/**
+ * A looping, muted product recording for a Figure. Rests on its poster for
+ * reduced-motion visitors. `label` describes what happens in it.
+ */
+export function Video({ src, poster, label }: { src: string; poster: string; label: string }) {
+  return <CardVideo src={src} poster={poster} label={label} />;
 }
 
 /** Three-up outcome numbers. Only real numbers; otherwise leave it out. */

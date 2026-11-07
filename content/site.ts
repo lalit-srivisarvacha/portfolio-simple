@@ -47,7 +47,16 @@ export type Project = {
 
 /** Order here is display order on the home page. [CHECK] brands are placeholders; match each to its project. */
 export const projects: Project[] = [
-  { slug: "project-01", title: "[Product title]", brand: "simpleclosure", summary: "[One line on what this work changed.]", seed: 11 },
+  {
+    slug: "returning-funds",
+    title: "Returning funds to investors",
+    brand: "simpleclosure",
+    summary: "Automated how founders return leftover funds to investors: 1,041 investors and $1.5M through the new flow in its first five months.",
+    video: "/work/returning-funds/tracker.mp4",
+    poster: "/work/returning-funds/tracker-poster.jpg",
+    imageAlt: "Founder view of the recipient tracker: each investor moves from signed release to distribution sent, and the status bar fills in",
+    seed: 11,
+  },
   { slug: "project-02", title: "[Product title]", brand: "rev", summary: "[One line on what this work changed.]", seed: 18 },
   { slug: "project-03", title: "[Product title]", brand: "oscar", summary: "[One line on what this work changed.]", seed: 25 },
   { slug: "project-04", title: "[Product title]", brand: "sleepreset", summary: "[One line on what this work changed.]", seed: 32 },
