@@ -9,13 +9,13 @@ export const site = {
   role: "Senior Product Designer",
   location: "Los Angeles",
   email: "lalit93@me.com",
-  avatar: undefined as string | undefined, // e.g. "/avatar.jpg" in /public
+  avatar: "/avatar.jpg" as string | undefined,
   /** Update once a year; a live Date() would make every page dynamic. */
   year: 2026,
   bio: {
-    lead: "Hi, I'm Lalit — a Senior Product Designer based in Los Angeles.",
-    rest: "Over the last [N] years I've designed web and mobile products for teams from early-stage startups to [COMPANY], with a soft spot for the unglamorous flows people use every day.",
-    currentlyAt: { name: "[COMPANY]", href: "#" },
+    lead: "Hey, I'm Lalit — a senior product designer based in Los Angeles.",
+    currentlyAt: { name: "SimpleClosure", href: "https://simpleclosure.com" },
+    rest: "streamlining the way founders wind down their businesses.",
   },
   linkedin: "https://www.linkedin.com/in/lalit-srivisarvacha/",
 };

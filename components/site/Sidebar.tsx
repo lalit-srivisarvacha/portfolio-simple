@@ -17,11 +17,11 @@ export function Sidebar() {
         <div className={styles.intro}>
           <h1 className="title">{site.fullName}</h1>
           <p className={`body-lg muted ${styles.bio}`}>
-            {site.bio.lead} {site.bio.rest} Currently at{" "}
-            <a className="link" href={site.bio.currentlyAt.href}>
+            {site.bio.lead} Currently at{" "}
+            <a className="link" href={site.bio.currentlyAt.href} target="_blank" rel="noreferrer">
               {site.bio.currentlyAt.name}
-            </a>
-            .
+            </a>{" "}
+            {site.bio.rest}
           </p>
         </div>
 
