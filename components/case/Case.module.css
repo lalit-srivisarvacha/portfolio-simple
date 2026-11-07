@@ -4,39 +4,117 @@
   flex-direction: column;
 }
 
+/* Floating nav: two clusters pinned to the top corners, no bar behind them.
+   They overlap the page as it scrolls, so each sits on bg-raised with
+   shadow-float, the one depth step the system allows for floating controls. */
 .nav {
-  position: sticky;
-  top: 0;
-  z-index: 2;
+  position: fixed;
+  top: var(--space-4);
+  left: var(--space-4);
+  right: var(--space-4);
+  z-index: 10;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: var(--space-3) var(--space-5);
-  background: color-mix(in srgb, var(--bg) 85%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  gap: var(--space-2);
+  pointer-events: none;
 }
 
-.back {
+.navGroup {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--bg-raised);
+  box-shadow: var(--shadow-float), inset 0 0 0 1px var(--hairline);
+  min-width: 0;
+}
+
+.navPill {
+  appearance: none;
+  border: 0;
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
   height: var(--control-h-sm);
+  min-width: 0;
   padding: 0 var(--space-3) 0 var(--space-2);
   border-radius: var(--radius-pill);
-  background: var(--bg-surface);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+.navPill:hover,
+.navPill[aria-expanded="true"] { background: var(--bg-hover); }
+.navPill svg { flex: none; }
+
+/* Case-study switcher */
+.switcher { position: relative; min-width: 0; }
+.switcherLabel {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.chevron { transition: transform var(--duration-base) var(--ease-standard); }
+.navPill[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: calc(-1 * var(--space-1));
+  width: 280px;
+  max-width: calc(100vw - 2 * var(--space-4));
+  max-height: calc(100dvh - 96px);
+  overflow-y: auto;
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  background: var(--bg-raised);
+  box-shadow: var(--shadow-float), inset 0 0 0 1px var(--hairline);
+  animation: menuIn var(--duration-fast) var(--ease-standard);
+}
+.menu[hidden] { display: none; }
+.menu p { padding: var(--space-2) var(--space-3) var(--space-1); }
+.menu ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: var(--control-h);
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
   font-size: 13px;
   line-height: 20px;
   font-weight: 500;
   transition: background-color var(--duration-fast) var(--ease-standard);
 }
-.back:hover { background: var(--bg-hover); }
+.menuItem:hover { background: var(--bg-hover); }
+.menuItem[aria-current="page"] { background: var(--bg-surface); }
+.menuTitle { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+@keyframes menuIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu { animation: none; }
+  .chevron, .navPill { transition: none; }
+}
 
 .main {
   width: 100%;
   max-width: var(--content-max);
   margin: 0 auto;
-  padding: var(--space-8) var(--space-5) var(--space-9);
+  padding: calc(var(--space-8) + var(--space-6)) var(--space-5) var(--space-9);
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -113,6 +191,8 @@
 }
 
 @media (max-width: 639px) {
-  .main { padding: var(--space-6) var(--space-4) var(--space-8); gap: var(--space-7); }
+  .main { padding: calc(var(--space-8) + var(--space-4)) var(--space-4) var(--space-8); gap: var(--space-7); }
+  .nav { top: var(--space-3); left: var(--space-3); right: var(--space-3); }
+  .switcherLabel { max-width: 120px; }
   .outcomes { grid-template-columns: 1fr; }
 }

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 import { Icon, Pill, PixelBlock, ThemeToggle } from "@/components/ui";
 import { site } from "@/content/site";
+import { CaseSwitcher } from "./CaseSwitcher";
 import styles from "./Case.module.css";
 
 /* ───────────────────────────────────────────────────────────────
@@ -13,12 +14,17 @@ import styles from "./Case.module.css";
 export function CasePage({ children }: { children: ReactNode }) {
   return (
     <div className={styles.page}>
-      <nav className={styles.nav} aria-label="Primary">
-        <Link href="/" className={styles.back}>
-          <Icon name="arrowLeft" size={16} />
-          {site.name}
-        </Link>
-        <ThemeToggle />
+      <nav className={styles.nav} aria-label="Case study">
+        <div className={styles.navGroup}>
+          <Link href="/" className={styles.navPill}>
+            <Icon name="arrowLeft" size={16} />
+            Home
+          </Link>
+        </div>
+        <div className={styles.navGroup}>
+          <CaseSwitcher />
+          <ThemeToggle />
+        </div>
       </nav>
       <main className={styles.main}>{children}</main>
       <footer className={styles.footer}>

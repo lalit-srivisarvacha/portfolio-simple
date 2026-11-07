@@ -27,7 +27,7 @@ export function useTheme(): [Theme, (t: Theme) => void] {
   return [theme, set];
 }
 
-/** 56×32 pill switch. Flips data-theme on <html> and persists the choice. */
+/** 60×32 pill switch: sun and moon slots, an ink knob under the active theme. Flips data-theme on <html> and persists the choice. */
 export function ThemeToggle() {
   const [theme, setTheme] = useTheme();
   const dark = theme === "dark";
@@ -40,8 +40,12 @@ export function ThemeToggle() {
       aria-label="Dark mode"
       onClick={() => setTheme(dark ? "light" : "dark")}
     >
-      <span className="lds-toggle__knob">
-        <Icon name={dark ? "moon" : "sun"} size={14} />
+      <span className="lds-toggle__knob" aria-hidden="true" />
+      <span className="lds-toggle__slot lds-toggle__slot--light">
+        <Icon name="sun" />
+      </span>
+      <span className="lds-toggle__slot lds-toggle__slot--dark">
+        <Icon name="moon" />
       </span>
     </button>
   );
