@@ -15,7 +15,7 @@ export const site = {
   /** Update once a year; a live Date() would make every page dynamic. */
   year: 2026,
   bio: {
-    lead: "Hey, I'm Lalit - a senior product designer based in Los Angeles.",
+    lead: "A senior product designer with 6 years of experience based in Los Angeles.",
     currentlyAt: { name: "SimpleClosure", href: "https://simpleclosure.com" },
     rest: "streamlining the way founders wind down their businesses.",
   },
