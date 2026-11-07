@@ -12,7 +12,7 @@ export type ProjectCompany = {
 };
 
 export type ProjectCardProps = {
-  /** Product name — the second half of the chip. */
+  /** Product name — the chip's text, next to the company brandmark. */
   title: string;
   company: ProjectCompany;
   href: string;
@@ -34,8 +34,9 @@ export type ProjectCardProps = {
 
 /**
  * One case study on the home page: a radius-md well on bg-surface with the product shot
- * or animation centered inside, and a chip in the bottom-left corner naming the company
- * (brandmark + name) and the product. The whole card is the link.
+ * or animation centered inside, and a chip in the bottom-left corner with the company
+ * brandmark and the product title. The company name stays in the link's accessible name.
+ * The whole card is the link.
  */
 export function ProjectCard({
   title,
@@ -79,7 +80,6 @@ export function ProjectCard({
         iconSrc={company.logo}
         monogram={company.logo ? undefined : company.name}
       >
-        <span className="lds-card__company">{company.name}</span>
         <span className="lds-card__product">{title}</span>
       </Pill>
     </Link>
