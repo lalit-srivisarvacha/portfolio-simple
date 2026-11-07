@@ -5,6 +5,8 @@ export const ICONS = {
   arrowUpRight: "M7 17 17 7M7 7h10v10",
   arrowRight: "M5 12h14M12 5l7 7-7 7",
   arrowLeft: "M19 12H5M12 19l-7-7 7-7",
+  chevronDown: "M6 9l6 6 6-6",
+  check: "M5 12.5l4.5 4.5L19 7.5",
   mail: "M4 6h16v12H4zM4 7l8 6 8-6",
   sun: "M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z",
   moon: "M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z",
