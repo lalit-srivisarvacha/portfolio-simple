@@ -9,7 +9,7 @@ import { CaseHero, CasePage, Figure, Outcomes, Section } from "@/components/case
  */
 
 export const metadata: Metadata = {
-  title: "Project 01 — Lalit",
+  title: "Project 01 - Lalit",
   description: "[One line on what this work changed.]",
 };
 

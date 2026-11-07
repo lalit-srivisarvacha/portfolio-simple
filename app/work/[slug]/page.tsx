@@ -16,7 +16,7 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps<"/work/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const p = projects.find((x) => x.slug === slug);
-  return p ? { title: `${p.title} — Lalit`, description: p.summary } : {};
+  return p ? { title: `${p.title} - Lalit`, description: p.summary } : {};
 }
 
 export default async function Page({ params }: PageProps<"/work/[slug]">) {

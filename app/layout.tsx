@@ -10,7 +10,7 @@ const geistSans = GeistSans;
 const geistMono = GeistMono;
 
 export const metadata: Metadata = {
-  title: "Lalit — Senior Product Designer",
+  title: "Lalit - Senior Product Designer",
   description:
     "Senior Product Designer based in Los Angeles, designing web and mobile products.",
 };
