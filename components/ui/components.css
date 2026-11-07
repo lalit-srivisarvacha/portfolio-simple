@@ -243,12 +243,14 @@
 .lds-avatar--sm { width: 40px; height: 40px; font-size: 15px; }
 
 /* ---------- ThemeToggle ---------- */
+/* Two slots, sun and moon, both always visible. An ink knob slides under the
+   active one; hovering the other slot tints it one step. */
 .lds-toggle {
   appearance: none;
   position: relative;
   display: inline-flex;
   align-items: center;
-  width: 56px;
+  gap: var(--space-1);
   height: var(--control-h-sm);
   padding: 2px;
   border: 0;
@@ -258,16 +260,28 @@
   cursor: pointer;
 }
 .lds-toggle__knob {
+  position: absolute;
+  top: 2px; left: 2px;
   width: 28px; height: 28px;
   border-radius: var(--radius-pill);
   background: var(--ink);
-  color: var(--ink-inverse);
-  display: inline-flex; align-items: center; justify-content: center;
   transform: translateX(0);
   transition: transform 200ms cubic-bezier(0.2, 0, 0, 1);
 }
-.lds-toggle[aria-checked="true"] .lds-toggle__knob { transform: translateX(24px); }
-.lds-toggle svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lds-toggle[aria-checked="true"] .lds-toggle__knob { transform: translateX(32px); }
+.lds-toggle__slot {
+  position: relative;
+  width: 28px; height: 28px;
+  border-radius: var(--radius-pill);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-muted);
+  transition: color 200ms cubic-bezier(0.2, 0, 0, 1), background-color 120ms cubic-bezier(0.2, 0, 0, 1);
+}
+.lds-toggle[aria-checked="false"] .lds-toggle__slot--light,
+.lds-toggle[aria-checked="true"] .lds-toggle__slot--dark { color: var(--ink-inverse); }
+.lds-toggle[aria-checked="false"]:hover .lds-toggle__slot--dark,
+.lds-toggle[aria-checked="true"]:hover .lds-toggle__slot--light { background: var(--hairline); color: var(--ink); }
+.lds-toggle svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
 /* ---------- PixelBlock ---------- */
 .lds-pixels {
@@ -291,5 +305,5 @@
 .lds-link:hover { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .lds-root *, .lds-btn, .lds-iconbtn, .lds-toggle__knob, .lds-card__stage > *, .lds-card__arrow { transition-duration: 0ms !important; }
+  .lds-root *, .lds-btn, .lds-iconbtn, .lds-toggle__knob, .lds-toggle__slot, .lds-card__stage > *, .lds-card__arrow { transition-duration: 0ms !important; }
 }
