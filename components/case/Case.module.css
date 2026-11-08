@@ -133,8 +133,6 @@
    inside it; nothing breaks out. */
 .content {
   width: 100%;
-  max-width: var(--measure);
-  margin: 0 auto;
   min-width: 0;
   display: flex;
   flex-direction: column;
@@ -148,14 +146,14 @@
    an ink bar beside the part being read; no accent, it is navigation. */
 .toc { display: none; }
 
-/* Desktop: three columns. The side nav sits in the left gutter, its edge
-   lined up with the Home pill (both at --case-gutter from the viewport edge);
-   the matching right gutter keeps the content centered on the page. */
+/* Desktop: the side nav sits in the left gutter, its edge lined up with the
+   Home pill (both at --case-gutter from the viewport edge); the story fills
+   the rest of the width, out to the right gutter. */
 @media (min-width: 960px) {
   .main {
     --toc-w: 184px;
     display: grid;
-    grid-template-columns: minmax(var(--toc-w), 1fr) minmax(0, var(--measure)) minmax(var(--toc-w), 1fr);
+    grid-template-columns: var(--toc-w) minmax(0, 1fr);
     column-gap: var(--space-6);
     align-items: start;
     padding-left: var(--case-gutter);
@@ -163,44 +161,11 @@
   }
   .toc {
     display: block;
-    grid-column: 1;
-    width: var(--toc-w);
     position: sticky;
     top: var(--case-top);
     max-height: calc(100dvh - var(--case-top) - var(--space-5));
     overflow-y: auto;
   }
-  /* The story spans the center and right columns as a subgrid: text keeps
-     to the centered measure column, while figures start at the same left
-     edge and run on to the right gutter. */
-  .content {
-    grid-column: 2 / -1;
-    max-width: none;
-    margin: 0;
-    display: grid;
-    grid-template-columns: subgrid;
-    column-gap: normal; /* use main's column gap, not the flex gap above */
-    row-gap: var(--case-gap);
-  }
-  /* Chapters repeat the subgrid so their figures can run wide too. */
-  .content .chapter {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: subgrid;
-    column-gap: normal;
-    row-gap: var(--case-gap);
-  }
-  .content > *,
-  .chapter > * { grid-column: 1; }
-  .content > .figure,
-  .content > .figureRow,
-  .content > .chapter,
-  .chapter > .figure,
-  .chapter > .figureRow,
-  .chapter > .cards,
-  .chapter > .compare,
-  .chapter > .features,
-  .chapter > .outcomes { grid-column: 1 / -1; }
 }
 
 .tocList {
@@ -245,6 +210,18 @@
 
 .hero, .section, .figure, .outcomes { width: 100%; }
 
+/* Text (hero, eyebrows, sections) is centered in the story column on the
+   720px measure; figures and blocks fill the column's full width. */
+.content > *,
+.chapter > * {
+  width: 100%;
+  max-width: var(--measure);
+  margin-left: auto;
+  margin-right: auto;
+}
+.content > :is(.figure, .figureRow, .chapter),
+.chapter > :is(.figure, .figureRow, .cards, .compare, .features, .outcomes) { max-width: none; }
+
 /* Chapter: a hairline and a small mono label head each group of sections.
    Chapters sit a step further apart than sections (case-gap + space-7). */
 .chapter {
@@ -253,7 +230,7 @@
   gap: var(--case-gap);
   margin-top: var(--space-7);
 }
-.chapterTitle { margin: 0 0 calc(var(--space-6) - var(--case-gap)); }
+.chapterTitle { margin-top: 0; margin-bottom: calc(var(--space-6) - var(--case-gap)); }
 /* A block right after a Section belongs to it: pull it up to space-5. */
 .section + :is(.cards, .compare, .features, .outcomes, .figure, .figureRow) {
   margin-top: calc(var(--space-5) - var(--case-gap));
