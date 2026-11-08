@@ -1,5 +1,16 @@
 import type { Metadata } from "next";
-import { CaseHero, CasePage, Chapter, Figure, FigureRow, Outcomes, Section, Video } from "@/components/case/Case";
+import {
+  CaseHero,
+  CasePage,
+  Cards,
+  Chapter,
+  Compare,
+  FeatureTabs,
+  Figure,
+  Outcomes,
+  Section,
+  Video,
+} from "@/components/case/Case";
 
 const media = (name: string) => ({
   src: `/work/returning-funds/${name}.mp4`,
@@ -25,199 +36,165 @@ export default function Page() {
         ]}
       />
 
-      <Figure caption="The investor distribution hub: amount, status and the two tasks left to claim it.">
+      <Figure caption="Founders watch each investor move from signed release to distribution sent.">
         <Video
-          {...media("investor-final-f")}
-          size={[1280, 900]}
-          label="Investor distribution hub: opens how the amount was calculated, provides bank details after comparing ACH, wire and crypto, signs the release in a full-screen signing view, then the status moves to awaiting transfer and distribution sent"
+          {...media("tracker")}
+          size={[740, 863]}
+          label="Founder view of the recipient tracker: each investor moves from signed release to distribution sent, and the status bar fills in"
         />
       </Figure>
 
       <Chapter title="Background">
         <Section title="Returning funds held back growth">
           <p>
-            SimpleClosure helps founders shut down their companies. We built a platform to streamline a fragmented,
-            stressful process for founders at a difficult point in their entrepreneurial journey.
-          </p>
-          <p>
-            If a company has funds left at the end of a shutdown, it has to return them to its investors. Doing that was
-            a manual, time-intensive process for our operations team, and it had become a bottleneck on how many
-            customers we could take on.
+            SimpleClosure helps founders shut down their companies. Money left at the end goes back to investors, and
+            our ops team did that by hand: at least 10 minutes per investor, over 16 hours for a company with 100.
           </p>
         </Section>
 
-        <Section title="How it worked before">
-          <p>
-            Every return of funds was handled by hand. Operations spent at least 10 minutes per investor preparing
-            releases and relaying bank details, which added up to more than 16 hours for a company with 100 investors.
-          </p>
-          <ol>
-            <li>
-              <strong>Calculate distribution amounts.</strong> Our team reviews cap tables and ledgers to run the
-              waterfall calculation that sets how much each investor gets.
-            </li>
-            <li>
-              <strong>Prepare and send releases.</strong> Ops prepares a release agreement for each investor, one at a
-              time, to sign before they receive their distribution.
-            </li>
-            <li>
-              <strong>Collect investor bank details.</strong> After a release is signed, ops copies the payment details
-              from it into a spreadsheet for the founder.
-            </li>
-            <li>
-              <strong>Founder distributes funds.</strong> The founder sends each payment by hand and marks its status in
-              the spreadsheet.
-            </li>
-          </ol>
-        </Section>
+        <Cards
+          numbered
+          columns={4}
+          items={[
+            {
+              title: "Calculate amounts",
+              body: "Our team runs a waterfall over the cap table to set what each investor gets.",
+            },
+            {
+              title: "Prepare releases",
+              body: "Ops writes a release agreement for each investor, one at a time.",
+            },
+            {
+              title: "Collect bank details",
+              body: "Ops copies payment details from each signed release into a spreadsheet.",
+            },
+            {
+              title: "Send funds",
+              body: "The founder wires each payment by hand and marks it in the spreadsheet.",
+            },
+          ]}
+        />
 
         <Section title="The goal">
           <p>
-            Automate the operational process of returning funds to investors. It laddered up to a company goal of
-            removing operational bottlenecks so we could scale.
+            Automate steps 2 and 3, the work repeated for every investor. Amounts still need legal and finance
+            judgment, and founders pay from their own bank.
           </p>
-          <p>
-            I focused on steps 2 and 3, the work ops repeated by hand for every investor. Calculating amounts still
-            needs legal and finance judgment, and founders pay from their own bank accounts, so those stayed as they
-            were.
-          </p>
-          <ul>
-            <li>
-              <strong>Prepare and send releases</strong> became releases generated and sent automatically.
-            </li>
-            <li>
-              <strong>Collect payment details</strong> became bank details relayed straight to the founder.
-            </li>
-          </ul>
         </Section>
+
+        <Compare
+          items={[
+            {
+              label: "Prepare releases",
+              before: "Ops wrote and sent each release by hand.",
+              after: "Releases are generated and sent automatically.",
+            },
+            {
+              label: "Collect bank details",
+              before: "Ops copied bank details into a spreadsheet.",
+              after: "Bank details go straight to the founder.",
+            },
+          ]}
+        />
       </Chapter>
 
       <Chapter title="What we built">
         <Section title="Self-service for founders and investors">
-          <p>
-            We automated everything on the operations side after the distribution amounts are calculated, and built a
-            self-service experience for founders and investors that needs very little from ops.
-          </p>
+          <p>Everything after the waterfall runs without ops. Pick a step to see it.</p>
         </Section>
 
-        <Section title="Operations uploads the investor table">
-          <p>
-            Once the waterfall is done, ops exports it as a CSV and drops it into the admin. Every investor and amount
-            loads in, and that is the last manual step on our side.
-          </p>
-        </Section>
-
-        <Figure caption="Ops uploads the waterfall as a CSV and the investor table fills in.">
-          <Video
-            {...media("investor-table-v6")}
-            size={[1440, 900]}
-            label="Operations downloads the waterfall Google Sheet as a CSV, switches to the SimpleClosure admin tab, and drags the file into the empty investor table; rows load in and a CSV upload successful toast appears"
-          />
-        </Figure>
-
-        <Section title="Founders set up and sign once">
-          <p>
-            The founder chooses which payment methods investors can pick from: ACH, wire or crypto. Then they review the
-            generated release agreements, certify them, sign once and send every release to their investors together.
-          </p>
-        </Section>
-
-        <FigureRow>
-          <Figure aspect="4 / 5" caption="Choosing the payment methods investors can use.">
-            <Video
-              {...media("payment-methods-v4")}
-              size={[640, 900]}
-              label="Founder selects the payment methods investors can choose from: ACH, crypto with BTC and other tickers, then confirms and the task completes"
-            />
-          </Figure>
-          <Figure aspect="4 / 5" caption="Reviewing the releases, then signing and sending them all at once.">
-            <Video
-              {...media("review-release-v6")}
-              size={[640, 900]}
-              label="Founder opens Sequoia Capital's release agreement, scrolls through it and closes it, then certifies the agreements, signs once and sends every release to investors"
-            />
-          </Figure>
-        </FigureRow>
-
-        <Section title="Founders track every distribution">
-          <p>
-            As investors sign, each one moves from signed release to distribution sent. The founder opens an
-            investor&apos;s payment instructions, copies their bank details, uploads a transfer confirmation and marks
-            the distribution as paid.
-          </p>
-        </Section>
-
-        <FigureRow>
-          <Figure aspect="4 / 5" caption="Each investor moves from signed release to distribution sent.">
-            <Video
-              {...media("tracker")}
-              size={[740, 863]}
-              label="Founder view of the recipient tracker: each investor moves from signed release to distribution sent, and the status bar fills in"
-            />
-          </Figure>
-          <Figure aspect="4 / 5" caption="Paying an investor from their payment instructions.">
-            <Video
-              {...media("tracking-v5")}
-              size={[740, 863]}
-              label="An investor signs their release; the founder opens Lilly Allen's payment instructions, copies the bank details, uploads a transfer confirmation, and marks the distribution as paid"
-            />
-          </Figure>
-        </FigureRow>
-
-        <Section title="Investors claim their distribution">
-          <p>
-            The first version was one linear flow: review and sign the release, then enter bank details for ACH. In the
-            final version, shown at the top of this page, investors land on a hub with their amount and how it was
-            calculated. They provide bank details after comparing ACH, wire and crypto, and sign the release in a
-            full-screen view. The status then moves to awaiting transfer, then distribution sent.
-          </p>
-        </Section>
-
-        <Figure caption="The first version: sign the release, then enter bank details.">
-          <Video
-            {...media("investor-v1d")}
-            size={[1280, 832]}
-            label="Investor opens their return of funds, reviews and signs the release of claims, then enters bank details for ACH and submits"
-          />
-        </Figure>
+        <FeatureTabs
+          items={[
+            {
+              who: "Operations",
+              title: "Upload the investor table",
+              body: "Ops exports the waterfall as a CSV and drops it in. Every investor and amount loads, and that is the last manual step on our side.",
+              video: {
+                ...media("investor-table-v6"),
+                size: [1440, 900],
+                label:
+                  "Operations downloads the waterfall Google Sheet as a CSV, switches to the SimpleClosure admin tab, and drags the file into the empty investor table; rows load in and a CSV upload successful toast appears",
+              },
+            },
+            {
+              who: "Founder",
+              title: "Choose payment methods",
+              body: "The founder picks what investors can be paid by: wire, ACH or crypto.",
+              video: {
+                ...media("payment-methods-v4"),
+                size: [640, 900],
+                label:
+                  "Founder selects the payment methods investors can choose from: ACH, crypto with BTC and other tickers, then confirms and the task completes",
+              },
+            },
+            {
+              who: "Founder",
+              title: "Sign every release at once",
+              body: "Releases are generated for every investor. The founder reviews them, signs once and sends them all.",
+              video: {
+                ...media("review-release-v6"),
+                size: [640, 900],
+                label:
+                  "Founder opens Sequoia Capital's release agreement, scrolls through it and closes it, then certifies the agreements, signs once and sends every release to investors",
+              },
+            },
+            {
+              who: "Founder",
+              title: "Pay and track each investor",
+              body: "As investors sign, their payment instructions appear. The founder sends the transfer, uploads the confirmation and marks it paid.",
+              video: {
+                ...media("tracking-v5"),
+                size: [740, 863],
+                label:
+                  "An investor signs their release; the founder opens Lilly Allen's payment instructions, copies the bank details, uploads a transfer confirmation, and marks the distribution as paid",
+              },
+            },
+            {
+              who: "Investor",
+              title: "Claim a distribution",
+              body: "Investors see their amount and how it was calculated, choose how to be paid and sign in one place. This hub replaced a first version that was one linear flow.",
+              video: {
+                ...media("investor-final-f"),
+                size: [1280, 900],
+                label:
+                  "Investor distribution hub: opens how the amount was calculated, provides bank details after comparing ACH, wire and crypto, signs the release in a full-screen signing view, then the status moves to awaiting transfer and distribution sent",
+              },
+            },
+          ]}
+        />
       </Chapter>
 
       <Chapter title="Results">
         <Section title="Impact after five months">
-          <p>
-            We launched on April 13, 2026. By September 26, 61 companies and 1,041 investors had gone through the new
-            flow. The ops time below assumes about 10 minutes per investor to prepare and send releases and compile
-            payment details: 10 minutes × 1,041 investors is 173.5 hours.
-          </p>
+          <p>Launched April 13, 2026. Numbers as of September 26.</p>
         </Section>
 
         <Outcomes
           items={[
             { value: "1,041", label: "investors across 61 companies" },
             { value: "$1.5M", label: "returned to investors" },
-            { value: "173 hrs", label: "of ops time saved, over four weeks full-time" },
+            { value: "173 hrs", label: "of ops time saved, at about 10 minutes per investor" },
           ]}
         />
 
-        <Section title="What I heard next">
-          <p>Since launch, feedback from clients and our ops team has shaped what comes next.</p>
-          <ul>
-            <li>
-              <strong>Sending payments one by one takes too long.</strong> Banks don&apos;t support bulk wire payments,
-              so clients with 50 to 100 or more investors send each payment by hand. They would pay a premium for
-              SimpleClosure to handle it.
-            </li>
-            <li>
-              <strong>Clients need custom release agreements.</strong> Ops gets requests for unique or custom releases
-              and wants to choose which agreement each company uses.
-            </li>
-            <li>
-              <strong>Some investors won&apos;t sign a release.</strong> Investors aren&apos;t legally required to sign
-              one to receive a distribution, and some refuse. Paying them out needs engineering today, so ops wants to
-              mark them as declined to sign, let founders pay them anyway, and flag it on the dashboard.
-            </li>
-          </ul>
-        </Section>
+        <Section title="What I heard next" />
+
+        <Cards
+          items={[
+            {
+              title: "Bulk payments",
+              body: "Banks don't support bulk wires, so clients with 50 to 100 or more investors send each one by hand. They would pay for us to handle it.",
+            },
+            {
+              title: "Custom release agreements",
+              body: "Some clients need their own release. Ops wants to choose which agreement each company uses.",
+            },
+            {
+              title: "Investors who won't sign",
+              body: "Signing isn't legally required and some refuse. Ops wants to mark them declined, let founders pay anyway and flag it.",
+            },
+          ]}
+        />
       </Chapter>
     </CasePage>
   );

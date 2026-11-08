@@ -5,6 +5,9 @@ import { CardVideo } from "@/components/ui/CardVideo";
 import { site } from "@/content/site";
 import { CaseSwitcher } from "./CaseSwitcher";
 import { CaseToc } from "./CaseToc";
+
+export { Cards, Compare } from "./Blocks";
+export { FeatureTabs, type Feature } from "./FeatureTabs";
 import styles from "./Case.module.css";
 
 /* ───────────────────────────────────────────────────────────────
@@ -110,11 +113,11 @@ export function Chapter({ title, id, children }: { title: string; id?: string; c
  * A titled chunk of the story inside a Chapter. Its heading stays in the
  * text but it isn't a nav entry; the Chapter is. Sections are space-8 apart.
  */
-export function Section({ title, id, children }: { title: string; id?: string; children: ReactNode }) {
+export function Section({ title, id, children }: { title: string; id?: string; children?: ReactNode }) {
   return (
     <div id={id ?? slugify(title)} className={styles.section}>
       <h3 className="heading">{title}</h3>
-      <div className={styles.prose}>{children}</div>
+      {children && <div className={styles.prose}>{children}</div>}
     </div>
   );
 }

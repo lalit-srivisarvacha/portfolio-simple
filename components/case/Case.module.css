@@ -192,7 +192,10 @@
   .content > .chapter,
   .chapter > .figure,
   .chapter > .figureRow,
-  .chapter > .chapterTitle { grid-column: 1 / -1; }
+  .chapter > .cards,
+  .chapter > .compare,
+  .chapter > .features,
+  .chapter > .outcomes { grid-column: 1 / -1; }
 }
 
 .tocList {
@@ -245,10 +248,117 @@
   gap: var(--space-8);
   margin-top: var(--space-6);
 }
-.chapterTitle {
-  margin: 0 0 calc(var(--space-6) - var(--space-8));
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--hairline);
+.chapterTitle { margin: 0 0 calc(var(--space-6) - var(--space-8)); }
+/* A block right after a Section belongs to it: pull it up to space-5. */
+.section + :is(.cards, .compare, .features, .outcomes, .figure, .figureRow) {
+  margin-top: calc(var(--space-5) - var(--space-8));
+}
+
+/* ---------- Blocks: cards, compare, feature accordion ---------- */
+.cards {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: var(--space-3);
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+.card > :global(.mono-sm) { margin-bottom: var(--space-4); }
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 25px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.compare { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+.compareRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--space-5) minmax(0, 1fr);
+  grid-template-areas: "label label label" "before arrow after";
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+}
+.compareLabel { grid-area: label; }
+.compareRow > p:first-of-type { grid-area: before; }
+.compareArrow { grid-area: arrow; display: grid; place-items: center; color: var(--ink-muted); }
+.compareAfter { grid-area: after; margin: 0; font-size: 15px; line-height: 25px; font-weight: 500; color: var(--ink); }
+
+/* Feature accordion: list on the left, one media well on the right. */
+.features {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--space-5);
+  align-items: start;
+}
+.featureList { display: flex; flex-direction: column; gap: var(--space-1); }
+.featureItem {
+  border-radius: var(--radius-md);
+  transition: background-color var(--duration-fast) var(--ease-standard);
+}
+.featureItem[data-open] { background: var(--bg-surface); }
+.featureItem h4 { margin: 0; }
+.featureButton {
+  appearance: none;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--ink-muted);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard);
+}
+.featureItem:not([data-open]) .featureButton:hover { background: var(--bg-hover); }
+.featureButton .cardTitle { color: inherit; }
+.featureItem[data-open] .featureButton { color: var(--ink); cursor: default; }
+.featureButton svg { flex: none; transition: transform var(--duration-base) var(--ease-standard); }
+.featureItem[data-open] .featureButton svg { transform: rotate(180deg); }
+.featureHead { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.featureBody {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows var(--duration-base) var(--ease-standard), visibility var(--duration-base);
+}
+.featureBody > div { overflow: hidden; }
+.featureBody p { padding: 0 var(--space-5) var(--space-5); }
+.featureItem[data-open] .featureBody { grid-template-rows: 1fr; visibility: visible; }
+.featureMedia { position: sticky; top: var(--case-top); }
+.featureMedia .well { aspect-ratio: 5 / 4; }
+.featureMedia .stage { inset: var(--space-6); }
+.fadeIn { animation: fadeIn var(--duration-base) var(--ease-standard); }
+@keyframes fadeIn { from { opacity: 0; } }
+
+@media (max-width: 1199px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 959px) {
+  .features { grid-template-columns: 1fr; }
+  .featureMedia { position: static; order: -1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .featureBody, .featureItem, .featureButton, .featureButton svg { transition: none; }
+  .fadeIn { animation: none; }
 }
 
 .hero { display: flex; flex-direction: column; gap: var(--space-4); }
@@ -348,8 +458,11 @@
   .content, .chapter { gap: var(--space-7); }
   .chapter { margin-top: var(--space-4); }
   .chapterTitle { margin-bottom: calc(var(--space-5) - var(--space-7)); }
+  .section + :is(.cards, .compare, .features, .outcomes, .figure, .figureRow) { margin-top: calc(var(--space-5) - var(--space-7)); }
   .page { --case-gutter: var(--space-3); }
   .nav { top: var(--space-3); }
-  .outcomes, .figureRow { grid-template-columns: 1fr; }
+  .outcomes, .figureRow, .cards { grid-template-columns: 1fr; }
+  .compareRow { grid-template-columns: 1fr; grid-template-areas: "label" "before" "arrow" "after"; justify-items: start; }
+  .compareArrow { transform: rotate(90deg); }
   .stage, .figureRow .stage { inset: var(--space-4); }
 }
