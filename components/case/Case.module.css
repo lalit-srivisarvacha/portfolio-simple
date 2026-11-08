@@ -120,6 +120,8 @@
 .main {
   /* Top of the content column; the side nav sticks at the same line. */
   --case-top: calc(var(--space-8) + var(--space-6));
+  /* Space between sections and blocks; chapters add space-7 on top. */
+  --case-gap: var(--space-9);
   width: 100%;
   padding: var(--case-top) var(--space-5) var(--space-9);
 }
@@ -133,7 +135,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--case-gap);
 }
 
 /* Anchored parts land below the floating nav, not under it. */
@@ -175,7 +177,7 @@
     display: grid;
     grid-template-columns: subgrid;
     column-gap: normal; /* use main's column gap, not the flex gap above */
-    row-gap: var(--space-8);
+    row-gap: var(--case-gap);
   }
   /* Chapters repeat the subgrid so their figures can run wide too. */
   .content .chapter {
@@ -183,7 +185,7 @@
     display: grid;
     grid-template-columns: subgrid;
     column-gap: normal;
-    row-gap: var(--space-8);
+    row-gap: var(--case-gap);
   }
   .content > *,
   .chapter > * { grid-column: 1; }
@@ -241,17 +243,17 @@
 .hero, .section, .figure, .outcomes { width: 100%; }
 
 /* Chapter: a hairline and a small mono label head each group of sections.
-   Chapters sit a step further apart than sections (space-8 + space-6). */
+   Chapters sit a step further apart than sections (case-gap + space-7). */
 .chapter {
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
-  margin-top: var(--space-6);
+  gap: var(--case-gap);
+  margin-top: var(--space-7);
 }
-.chapterTitle { margin: 0 0 calc(var(--space-6) - var(--space-8)); }
+.chapterTitle { margin: 0 0 calc(var(--space-6) - var(--case-gap)); }
 /* A block right after a Section belongs to it: pull it up to space-5. */
 .section + :is(.cards, .compare, .features, .outcomes, .figure, .figureRow) {
-  margin-top: calc(var(--space-5) - var(--space-8));
+  margin-top: calc(var(--space-5) - var(--case-gap));
 }
 
 /* ---------- Blocks: cards, compare, feature accordion ---------- */
@@ -349,16 +351,95 @@
 .fadeIn { animation: fadeIn var(--duration-base) var(--ease-standard); }
 @keyframes fadeIn { from { opacity: 0; } }
 
+/* ---------- Impact charts (inside a FeatureTabs well) ---------- */
+/* Charts set their own height, so their well grows with them instead of
+   clipping (the 5:4 shape is a minimum). */
+.featureMedia .chartWell { display: flex; }
+.chartStage { flex: 1; min-width: 0; display: flex; padding: var(--space-6); }
+.chart {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-5);
+}
+.chartCenter { align-items: center; text-align: center; gap: var(--space-2); }
+.chartKey {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  font-size: 13px;
+  line-height: 20px;
+  color: var(--ink-muted);
+}
+.chartKey span { display: inline-flex; align-items: center; gap: var(--space-2); }
+.chartKey i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-muted); }
+.chartKey i[data-kind="company"] { background: var(--ink); }
+.chartKey i[data-kind="day"] { border-radius: 2px; background: var(--ink); }
+
+.arcWrap { position: relative; }
+.arc { display: block; width: 100%; height: auto; overflow: visible; }
+.arcLabel {
+  margin-top: calc(-1 * var(--space-3));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.arcInvestor { fill: var(--ink-muted); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.arcCompany { fill: var(--ink); opacity: 0; }
+.arc[data-shown] .arcInvestor,
+.arc[data-shown] .arcCompany {
+  opacity: 0.55;
+  transition: opacity 600ms var(--ease-standard) var(--d), fill var(--duration-fast) var(--ease-standard);
+}
+.arc[data-shown] .arcCompany { opacity: 1; }
+.arcGroup { cursor: default; }
+.arcHit { fill: transparent; }
+.arc circle { pointer-events: none; }
+.arc[data-hover] .arcGroup:not([data-on]) circle { opacity: 0.15; transition-delay: 0ms; }
+.arc[data-hover] .arcGroup[data-on] .arcInvestor { opacity: 1; fill: var(--ink); transition-delay: 0ms; }
+
+.countFigure { margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.calendar {
+  display: grid;
+  grid-template-columns: auto repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+  align-items: center;
+}
+.calendar > .mono-sm, .calendar > :global(.mono-sm) { text-align: center; }
+.calendarRow { display: contents; }
+.calendarRow > :global(.mono-sm) { padding-right: var(--space-2); white-space: nowrap; }
+.calendarDay {
+  aspect-ratio: 1;
+  max-height: 56px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-hover);
+  background-image: linear-gradient(90deg, var(--ink) 0 100%);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+}
+.calendar[data-shown] .calendarDay {
+  background-size: calc(var(--fill) * 100%) 100%;
+  transition: background-size 400ms var(--ease-standard) var(--d);
+}
+
 @media (max-width: 1199px) {
   .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 959px) {
   .features { grid-template-columns: 1fr; }
   .featureMedia { position: static; order: -1; }
+  .featureMedia .chartWell { aspect-ratio: auto; }
+  .chartStage { padding: var(--space-4); }
 }
 @media (prefers-reduced-motion: reduce) {
   .featureBody, .featureItem, .featureButton, .featureButton svg { transition: none; }
   .fadeIn { animation: none; }
+  .arc[data-shown] .arcInvestor, .arc[data-shown] .arcCompany, .calendar[data-shown] .calendarDay { transition: none; }
 }
 
 .hero { display: flex; flex-direction: column; gap: var(--space-4); }
@@ -455,10 +536,9 @@
 
 @media (max-width: 639px) {
   .main { --case-top: calc(var(--space-8) + var(--space-4)); padding: var(--case-top) var(--space-4) var(--space-8); }
-  .content, .chapter { gap: var(--space-7); }
-  .chapter { margin-top: var(--space-4); }
-  .chapterTitle { margin-bottom: calc(var(--space-5) - var(--space-7)); }
-  .section + :is(.cards, .compare, .features, .outcomes, .figure, .figureRow) { margin-top: calc(var(--space-5) - var(--space-7)); }
+  .main { --case-gap: var(--space-8); }
+  .chapter { margin-top: var(--space-5); }
+  .chapterTitle { margin-bottom: calc(var(--space-5) - var(--case-gap)); }
   .page { --case-gutter: var(--space-3); }
   .nav { top: var(--space-3); }
   .outcomes, .figureRow, .cards { grid-template-columns: 1fr; }

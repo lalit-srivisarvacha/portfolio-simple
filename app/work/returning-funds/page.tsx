@@ -5,11 +5,13 @@ import {
   Cards,
   Chapter,
   Compare,
+  CountUp,
   FeatureTabs,
   Figure,
-  Outcomes,
   Section,
   Video,
+  VolumeArc,
+  WorkCalendar,
 } from "@/components/case/Case";
 
 const media = (name: string) => ({
@@ -169,11 +171,26 @@ export default function Page() {
           <p>Launched April 13, 2026. Numbers as of September 26.</p>
         </Section>
 
-        <Outcomes
+        <FeatureTabs
           items={[
-            { value: "1,041", label: "investors across 61 companies" },
-            { value: "$1.5M", label: "returned to investors" },
-            { value: "173 hrs", label: "of ops time saved, at about 10 minutes per investor" },
+            {
+              who: "Volume",
+              title: "61 companies and 1,041 investors",
+              body: "Every one of them went through the new flow instead of an ops spreadsheet. Hover the chart to see each company.",
+              media: <VolumeArc companies={61} investors={1041} />,
+            },
+            {
+              who: "Capital returned",
+              title: "$1.5M back to investors",
+              body: "Returned through the automated flow, from release to payment confirmation.",
+              media: <CountUp value={1500000} prefix="$" caption="returned to investors" />,
+            },
+            {
+              who: "Operational productivity",
+              title: "Over four weeks of full-time work saved",
+              body: "At about 10 minutes per investor to prepare releases and compile payment details: 10 minutes × 1,041 investors is 173.5 hours.",
+              media: <WorkCalendar hours={173.5} />,
+            },
           ]}
         />
 

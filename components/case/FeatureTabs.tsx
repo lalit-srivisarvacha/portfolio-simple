@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, type CSSProperties } from "react";
+import { useId, useState, type CSSProperties, type ReactNode } from "react";
 import { Icon } from "@/components/ui";
 import { CardVideo } from "@/components/ui/CardVideo";
 import styles from "./Case.module.css";
@@ -10,7 +10,10 @@ export type Feature = {
   body: string;
   /** Who uses it, shown as a small eyebrow: "Operations", "Founder" … */
   who?: string;
-  video: { src: string; poster: string; label: string; size: [number, number] };
+  /** A recording for the well… */
+  video?: { src: string; poster: string; label: string; size: [number, number] };
+  /** …or any other media, such as a chart. */
+  media?: ReactNode;
 };
 
 /**
@@ -22,7 +25,6 @@ export function FeatureTabs({ items }: { items: Feature[] }) {
   const [active, setActive] = useState(0);
   const base = useId();
   const current = items[active];
-  const [w, h] = current.video.size;
 
   return (
     <div className={styles.features}>
@@ -57,10 +59,20 @@ export function FeatureTabs({ items }: { items: Feature[] }) {
       </div>
 
       <div className={styles.featureMedia}>
-        <div className={styles.well}>
-          <div key={current.video.src} className={`${styles.stage} ${styles.fadeIn}`} style={{ "--shot-ratio": w / h } as CSSProperties}>
-            <CardVideo src={current.video.src} poster={current.video.poster} label={current.video.label} />
-          </div>
+        <div className={current.video ? styles.well : `${styles.well} ${styles.chartWell}`}>
+          {current.video ? (
+            <div
+              key={active}
+              className={`${styles.stage} ${styles.fadeIn}`}
+              style={{ "--shot-ratio": current.video.size[0] / current.video.size[1] } as CSSProperties}
+            >
+              <CardVideo src={current.video.src} poster={current.video.poster} label={current.video.label} />
+            </div>
+          ) : (
+            <div key={active} className={`${styles.chartStage} ${styles.fadeIn}`}>
+              {current.media}
+            </div>
+          )}
         </div>
       </div>
     </div>

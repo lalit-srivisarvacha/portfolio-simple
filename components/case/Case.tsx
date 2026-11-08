@@ -8,6 +8,7 @@ import { CaseToc } from "./CaseToc";
 
 export { Cards, Compare } from "./Blocks";
 export { FeatureTabs, type Feature } from "./FeatureTabs";
+export { CountUp, VolumeArc, WorkCalendar } from "./ImpactCharts";
 import styles from "./Case.module.css";
 
 /* ───────────────────────────────────────────────────────────────
