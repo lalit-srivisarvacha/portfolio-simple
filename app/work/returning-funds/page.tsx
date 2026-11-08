@@ -27,12 +27,12 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <CasePage>
+    <CasePage brand="simpleclosure">
       <CaseHero
         title="Returning funds to investors"
         tags={["Product design", "Workflow automation"]}
         meta={[
-          { label: "Role", value: "[ROLE]" },
+          { label: "Role", value: "Sole product designer" },
           { label: "Timeline", value: "Q4 2025" },
           { label: "Company", value: "SimpleClosure" },
         ]}

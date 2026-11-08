@@ -10,7 +10,7 @@ Personal portfolio for Lalit, Senior Product Designer (Los Angeles). Next.js App
 
 ## Rules of the system (don't break these)
 
-- Two tones, one hue. Page is `--bg`, surfaces are `--bg-surface`, text is `--ink` / `--ink-muted`. `--accent` (coral) only for marks: the availability dot, link hover underline, focus ring. Never a section or button fill. `--accent-warm` (amber) only inside `PixelBlock`. Company brand colors only inside `Brandmark`.
+- Two tones, one hue. Page is `--bg`, surfaces are `--bg-surface`, text is `--ink` / `--ink-muted`. `--accent` (coral) only for marks: the availability dot, link hover underline, focus ring. Never a section or button fill. `--accent-warm` (amber) only inside `PixelBlock`. Company brand colors only inside `Brandmark`, with one exception: a case study passes `brand` to `CasePage` and borrows that company's `accent` (in `BRANDS`) as `--case-accent` for charts and data marks only, never text blocks, section fills or buttons. Each accent has a light-theme shade that holds 3:1 on `--bg-surface` and a dark-theme shade (usually the brand color itself).
 - Every interactive thing is a pill (`--radius-pill`). Cards and image wells are `--radius-md`. No square corners on controls.
 - No shadows except `--shadow-float` under a `Pill` that overlaps a card. Depth = one tint step.
 - Type is Geist 400/500 only. Nothing bold. Sizes come from the `.title` / `.heading` / `.body` … classes in `globals.css`; don't invent new font sizes.

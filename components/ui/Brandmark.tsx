@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-type BrandSpec = {
+export type BrandSpec = {
   name: string;
   /** Well fill, as on the company's LinkedIn avatar. A CSS color or gradient. */
   bg: string;
@@ -17,11 +17,18 @@ type BrandSpec = {
   ring?: boolean;
   /** Optical nudge, as a fraction of the well (positive moves down), for marks whose weight sits off their box. */
   offsetY?: number;
+  /**
+   * Accent for this company's case study (charts and data marks), from its brand color.
+   * `dark` is usually the brand color itself; `light` is a deeper shade of the same hue
+   * that holds 3:1 against bg-surface. Without one, case accents fall back to ink.
+   */
+  accent?: { light: string; dark: string };
 };
 
 /**
  * The companies whose work is on the site. Brand colors live here and nowhere else,
- * the same way accent-warm stays inside PixelBlock. Paths are the companies' own marks;
+ * the same way accent-warm stays inside PixelBlock; a case study borrows one through
+ * `accent` (see CasePage). Paths are the companies' own marks;
  * never redraw one. A company with no SVG uses its supplied image (`src`); with neither,
  * its initial shows.
  */
@@ -30,6 +37,7 @@ export const BRANDS = {
     name: "SimpleClosure",
     bg: "#ABFC96",
     ink: "#171717",
+    accent: { light: "#2F8A24", dark: "#ABFC96" },
     scale: 0.5,
     viewBox: "0 0 20 22",
     path: "M19.3867 9.59732V21.1146H16.4784V11.037C16.4784 6.53582 12.7851 2.87932 8.23865 2.87932C3.69216 2.87932 0 6.53582 0 11.037V9.59732C0 4.29986 4.34312 0 9.69392 0C15.0447 0 19.3878 4.29986 19.3878 9.59732H19.3867ZM6.95036 5.75863H6.62091C2.96623 5.75863 0 8.69528 0 12.3135V13.8781C0 10.9886 2.36526 8.63793 5.29286 8.63793H5.37011C8.28749 8.63793 10.663 10.9796 10.663 13.8781V21.1146H13.5713V12.3135C13.5713 8.69528 10.605 5.75863 6.95036 5.75863ZM3.87735 11.5172C1.73475 11.5172 0 13.2347 0 15.356V21.1146H7.75468V15.356C7.75468 13.2347 6.01994 11.5172 3.87735 11.5172Z",

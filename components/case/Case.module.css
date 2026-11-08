@@ -1,10 +1,13 @@
 .page {
   /* Side gutter shared by the floating nav and the side nav on desktop. */
   --case-gutter: var(--space-6);
+  /* Company accent for charts and data marks, set by CasePage's brand. */
+  --case-accent: var(--case-accent-light, var(--ink));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
+:global([data-theme="dark"]) .page { --case-accent: var(--case-accent-dark, var(--ink)); }
 
 /* Floating nav: two clusters pinned to the top corners, no bar behind them.
    They overlap the page as it scrolls, so each sits on bg-raised with
@@ -375,9 +378,9 @@
   color: var(--ink-muted);
 }
 .chartKey span { display: inline-flex; align-items: center; gap: var(--space-2); }
-.chartKey i { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-muted); }
-.chartKey i[data-kind="company"] { background: var(--ink); }
-.chartKey i[data-kind="day"] { border-radius: 2px; background: var(--ink); }
+.chartKey i { width: 8px; height: 8px; border-radius: 50%; background: var(--case-accent); opacity: 0.55; }
+.chartKey i[data-kind="company"] { opacity: 1; }
+.chartKey i[data-kind="day"] { border-radius: 2px; opacity: 1; }
 
 .arcWrap { position: relative; }
 .arc { display: block; width: 100%; height: auto; overflow: visible; }
@@ -388,8 +391,8 @@
   align-items: center;
   text-align: center;
 }
-.arcInvestor { fill: var(--ink-muted); opacity: 0; transform-box: fill-box; transform-origin: center; }
-.arcCompany { fill: var(--ink); opacity: 0; }
+.arcInvestor { fill: var(--case-accent); opacity: 0; transform-box: fill-box; transform-origin: center; }
+.arcCompany { fill: var(--case-accent); opacity: 0; }
 .arc[data-shown] .arcInvestor,
 .arc[data-shown] .arcCompany {
   opacity: 0.55;
@@ -400,9 +403,9 @@
 .arcHit { fill: transparent; }
 .arc circle { pointer-events: none; }
 .arc[data-hover] .arcGroup:not([data-on]) circle { opacity: 0.15; transition-delay: 0ms; }
-.arc[data-hover] .arcGroup[data-on] .arcInvestor { opacity: 1; fill: var(--ink); transition-delay: 0ms; }
+.arc[data-hover] .arcGroup[data-on] .arcInvestor { opacity: 1; transition-delay: 0ms; }
 
-.countFigure { margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.countFigure { margin: 0; font-variant-numeric: tabular-nums; white-space: nowrap; color: var(--case-accent); }
 
 .calendar {
   display: grid;
@@ -418,7 +421,7 @@
   max-height: 56px;
   border-radius: var(--radius-sm);
   background: var(--bg-hover);
-  background-image: linear-gradient(90deg, var(--ink) 0 100%);
+  background-image: linear-gradient(90deg, var(--case-accent) 0 100%);
   background-repeat: no-repeat;
   background-size: 0% 100%;
 }

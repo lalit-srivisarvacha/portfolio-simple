@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { CSSProperties, ReactNode } from "react";
-import { Icon, Pill, PixelBlock, ThemeToggle } from "@/components/ui";
+import { BRANDS, Icon, Pill, PixelBlock, ThemeToggle, type BrandId } from "@/components/ui";
+import type { BrandSpec } from "@/components/ui/Brandmark";
 import { CardVideo } from "@/components/ui/CardVideo";
 import { site } from "@/content/site";
 import { CaseSwitcher } from "./CaseSwitcher";
@@ -28,9 +29,18 @@ function slugify(text: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-export function CasePage({ children }: { children: ReactNode }) {
+/**
+ * The page frame for a case study. `brand` gives the page its company's
+ * accent as `--case-accent`, used by charts and data marks only (never
+ * text blocks, sections or buttons).
+ */
+export function CasePage({ children, brand }: { children: ReactNode; brand?: BrandId }) {
+  const accent = brand ? (BRANDS[brand] as BrandSpec).accent : undefined;
+  const style = accent
+    ? ({ "--case-accent-light": accent.light, "--case-accent-dark": accent.dark } as CSSProperties)
+    : undefined;
   return (
-    <div className={styles.page}>
+    <div className={styles.page} style={style}>
       <nav className={styles.nav} aria-label="Case study">
         <div className={styles.navGroup}>
           <Link href="/" className={styles.navPill}>
