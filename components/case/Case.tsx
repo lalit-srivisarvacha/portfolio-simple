@@ -4,7 +4,10 @@ import { Brandmark, Icon, Pill, ScreenPlaceholder, ThemeToggle, type BrandId, ty
 import { site } from "@/content/site";
 import { CaseSwitcher } from "./CaseSwitcher";
 import { CaseToc } from "./CaseToc";
+import { slugify } from "./slug";
 import styles from "./Case.module.css";
+
+export { SplitSection, type SplitItem } from "./SplitSection";
 
 /* ───────────────────────────────────────────────────────────────
    Case-study building blocks. Each case study is a hand-coded page
@@ -13,15 +16,6 @@ import styles from "./Case.module.css";
    ─────────────────────────────────────────────────────────────── */
 
 const CONTENT_ID = "case-content";
-
-/** Turns a section label into a stable anchor id: "What I did" → "what-i-did". */
-function slugify(text: string) {
-  return text
-    .toLowerCase()
-    .replace(/&/g, " and ")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
 
 export function CasePage({ children }: { children: ReactNode }) {
   return (

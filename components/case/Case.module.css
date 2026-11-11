@@ -332,3 +332,79 @@
   .nav { top: var(--space-3); }
   .outcomes { grid-template-columns: 1fr; }
 }
+
+/* ── SplitSection: text and accordions left, one image well right ── */
+.splitText { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+.splitStage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  overflow: hidden;
+}
+.splitMedia { position: absolute; inset: 0; animation: splitIn var(--duration-base) var(--ease-standard) backwards; }
+.splitMedia > img, .splitMedia > video { width: 100%; height: 100%; object-fit: cover; }
+@keyframes splitIn { from { opacity: 0; } }
+
+@media (min-width: 960px) {
+  .split {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--space-7);
+    align-items: start;
+  }
+  .splitStage { position: sticky; top: var(--case-top); }
+}
+
+.accordion { margin-top: var(--space-2); border-top: 1px solid var(--hairline); }
+.accItem { border-bottom: 1px solid var(--hairline); }
+.accHeading { margin: 0; }
+.accButton {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  color: var(--ink-muted);
+  text-align: left;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.accButton:hover, .accButton[aria-expanded="true"] { color: var(--ink); }
+.accButton[aria-expanded="true"] { cursor: default; }
+/* A plus on the items that can be opened; the open item drops it, since it can't be closed. */
+.accMark {
+  flex: none;
+  width: var(--control-h-xs);
+  height: var(--control-h-xs);
+  border-radius: var(--radius-pill);
+  background: var(--bg-surface);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity var(--duration-base) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard);
+}
+.accButton:hover .accMark { background: var(--bg-hover); }
+.accButton[aria-expanded="true"] .accMark { opacity: 0; }
+.accPanel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--duration-base) var(--ease-standard);
+}
+.accItem[data-open] .accPanel { grid-template-rows: 1fr; }
+.accBody { min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: var(--space-3); }
+.accBody > :last-child { padding-bottom: var(--space-5); }
+.accBody p { margin: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .splitMedia { animation: none; }
+  .accPanel, .accMark, .accButton { transition: none; }
+}

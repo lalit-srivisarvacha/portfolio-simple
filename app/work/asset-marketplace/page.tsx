@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { CaseHero, CasePage, Figure, Outcomes, Section } from "@/components/case/Case";
+import { CaseHero, CasePage, Figure, Outcomes, Section, SplitSection } from "@/components/case/Case";
+import { AssetFan, TrainingFlow } from "./figures";
 
 /*
  * SimpleClosure — Building an asset marketplace.
@@ -28,12 +29,38 @@ export default function Page() {
       {/* Hero shot: the marketplace in context */}
       <Figure aspect="16 / 9" />
 
-      <Section label="Problem" title="[Subheader: the problem in one line.]">
+      <SplitSection
+        label="Opportunity"
+        title="We were in a unique position to serve a new market"
+        items={[
+          {
+            title: "AssetHub",
+            body: (
+              <p>
+                We launched AssetHub to help founders who are shutting down liquidate their company&apos;s
+                assets, from patents, domains and hardware to codebases and workspace data.
+              </p>
+            ),
+            media: <AssetFan />,
+          },
+          {
+            title: "AI opportunity",
+            body: (
+              <p>
+                AI labs wanted codebases and workspace data to train their models, and were signing $1M+
+                deals for batches of codebases. The market was growing quickly.
+              </p>
+            ),
+            media: <TrainingFlow />,
+          },
+        ]}
+      >
         <p>
-          [Two or three sentences on what was broken, for whom, and how you knew. Quote a real founder or
-          a real number if you have one.]
+          SimpleClosure helps companies shut down, and part of that process is helping founders liquidate
+          what the company still owns. When AI labs began buying codebases and workspace data to train
+          their language models, we already worked with the founders who had them to sell.
         </p>
-      </Section>
+      </SplitSection>
 
       <Section label="Approach" title="[Subheader: the direction you took.]">
         <p>
