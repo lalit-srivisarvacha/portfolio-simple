@@ -27,7 +27,7 @@ Personal portfolio for Lalit, Senior Product Designer (Los Angeles). Next.js App
 
 ## Components (`components/ui`)
 
-`Button`, `IconButton`, `Pill`, `ProjectCard`, `Brandmark`, `Avatar`, `ThemeToggle`, `ScreenPlaceholder`, `Icon`. Class names (`lds-*`) match the design system's stylesheet on purpose — keep them in sync rather than forking styles. Icons are Lucide-style paths in `Icon.tsx`; add paths there, never emoji or icon fonts. Company marks live in `BRANDS` in `Brandmark.tsx` (the company's own SVG path, well color and mark color from its LinkedIn avatar); a project names one by id. Never redraw a mark.
+`Button`, `IconButton`, `Pill`, `ProjectCard`, `Brandmark`, `Avatar`, `ThemeToggle`, `ScreenPlaceholder`, `Icon`. Class names (`lds-*`) match the design system's stylesheet on purpose — keep them in sync rather than forking styles. Icons are Phosphor (`@phosphor-icons/react`, regular weight), mapped to the site's names in `Icon.tsx`; add one by importing it there, never emoji or icon fonts. Company marks live in `BRANDS` in `Brandmark.tsx` (the company's own SVG path, well color and mark color from its LinkedIn avatar); a project names one by id. Never redraw a mark.
 
 ## Working here
 

@@ -69,7 +69,7 @@
   transition: background-color 120ms cubic-bezier(0.2, 0, 0, 1);
 }
 .lds-iconbtn:hover { background: var(--bg-hover); }
-.lds-iconbtn svg { width: var(--icon); height: var(--icon); stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lds-iconbtn svg { width: var(--icon); height: var(--icon); fill: currentColor; }
 .lds-iconbtn--filled { background: var(--bg-surface); box-shadow: none; }
 
 /* ---------- Pill ---------- */
@@ -218,7 +218,7 @@
     opacity 200ms cubic-bezier(0.2, 0, 0, 1),
     transform 200ms cubic-bezier(0.2, 0, 0, 1);
 }
-.lds-card__arrow svg { flex: none; width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lds-card__arrow svg { flex: none; width: 16px; height: 16px; fill: currentColor; }
 .lds-card:hover .lds-card__arrow,
 .lds-card:focus-visible .lds-card__arrow {
   width: 16px;
@@ -278,7 +278,7 @@
 .lds-toggle[aria-checked="true"] .lds-toggle__slot--dark { color: var(--ink-inverse); }
 .lds-toggle[aria-checked="false"]:hover .lds-toggle__slot--dark,
 .lds-toggle[aria-checked="true"]:hover .lds-toggle__slot--light { background: var(--hairline); color: var(--ink); }
-.lds-toggle svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.lds-toggle svg { width: 16px; height: 16px; fill: currentColor; }
 
 /* ---------- ScreenPlaceholder ---------- */
 /* A blank app screen standing in for a product shot. The stage is a size container,
