@@ -52,9 +52,9 @@ export function CasePage({ children }: { children: ReactNode }) {
 }
 
 /**
- * One fact under the title. `brand` puts the company's mark in its own color
- * in the circle; `icon` puts a line icon in a neutral one. Leave both out for
- * a plain label and value.
+ * One fact beside the title: a small neutral circle and the value. `icon`
+ * puts a line icon in the circle, `brand` the company's mark (in the same
+ * neutral tones). The label isn't shown; screen readers still get it.
  */
 type Meta = { label: string; value: string; icon?: IconName; brand?: BrandId };
 
@@ -83,16 +83,14 @@ export function CaseHero({
         {meta.map((m) => (
           <div key={m.label} className={styles.metaItem}>
             {m.brand ? (
-              <Brandmark brand={m.brand} size={40} />
+              <Brandmark brand={m.brand} size={28} neutral />
             ) : m.icon ? (
               <span className={styles.metaIcon}>
-                <Icon name={m.icon} size={16} />
+                <Icon name={m.icon} size={14} />
               </span>
             ) : null}
-            <div className={styles.metaText}>
-              <dt className="mono-sm subtle">{m.label.toUpperCase()}</dt>
-              <dd className="body-sm">{m.value}</dd>
-            </div>
+            <dt className="sr-only">{m.label}</dt>
+            <dd className="body-sm">{m.value}</dd>
           </div>
         ))}
       </dl>

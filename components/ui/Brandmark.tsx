@@ -80,23 +80,28 @@ export type BrandmarkProps = {
   size?: number;
   /** Give the mark an accessible name. Leave off when the company name is already said nearby. */
   labelled?: boolean;
+  /**
+   * Drop the brand colors: the mark in ink-muted on bg-surface, to sit beside neutral icon circles.
+   * A company with only a raster mark shows its initial instead, since an image can't be recolored.
+   */
+  neutral?: boolean;
   className?: string;
 };
 
 /** A company's mark on its brand color in a round well, applied like its LinkedIn avatar. */
-export function Brandmark({ brand, size = 24, labelled, className }: BrandmarkProps) {
+export function Brandmark({ brand, size = 24, labelled, neutral, className }: BrandmarkProps) {
   const spec: BrandSpec = BRANDS[brand];
   const style = {
     "--bm-size": `${size}px`,
-    "--bm-bg": spec.bg,
-    "--bm-ink": spec.ink,
+    "--bm-bg": neutral ? "var(--bg-surface)" : spec.bg,
+    "--bm-ink": neutral ? "var(--ink-muted)" : spec.ink,
     "--bm-scale": spec.scale,
     "--bm-y": spec.offsetY ?? 0,
   } as CSSProperties;
 
   return (
     <span
-      className={["lds-brandmark", spec.ring && "lds-brandmark--ring", className].filter(Boolean).join(" ")}
+      className={["lds-brandmark", spec.ring && !neutral && "lds-brandmark--ring", className].filter(Boolean).join(" ")}
       style={style}
       role={labelled ? "img" : undefined}
       aria-label={labelled ? spec.name : undefined}
@@ -106,7 +111,7 @@ export function Brandmark({ brand, size = 24, labelled, className }: BrandmarkPr
         <svg viewBox={spec.viewBox} focusable="false">
           <path d={spec.path} fillRule={spec.evenOdd ? "evenodd" : undefined} clipRule={spec.evenOdd ? "evenodd" : undefined} />
         </svg>
-      ) : spec.src ? (
+      ) : spec.src && !neutral ? (
         // eslint-disable-next-line @next/next/no-img-element -- 24–96px mark, no optimization needed
         <img src={spec.src} alt="" width={size} height={size} />
       ) : (
