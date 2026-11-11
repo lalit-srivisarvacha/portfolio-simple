@@ -213,16 +213,37 @@
 
 .hero, .section, .figure, .outcomes { width: 100%; }
 
-.hero { display: flex; flex-direction: column; gap: var(--space-4); }
+/* Hero: the title in display type. Stacked by default, with the facts in a
+   row under a hairline; from 1200px the facts move to a right-hand column,
+   stacked, beside the title. */
+.hero { display: flex; flex-direction: column; gap: var(--space-5); }
+.heroTitle { margin: 0; text-wrap: balance; }
 .tags { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 
 .meta {
-  margin: var(--space-3) 0 0;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: var(--space-4) var(--space-5);
-  padding-top: var(--space-4);
+  padding-top: var(--space-5);
   border-top: 1px solid var(--hairline);
+}
+@media (min-width: 1200px) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) max-content;
+    column-gap: var(--space-8);
+    align-items: start;
+  }
+  .tags { grid-column: 1; }
+  .meta {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
+    padding-top: var(--space-2);
+    border-top: 0;
+  }
 }
 .metaItem { display: flex; align-items: center; gap: var(--space-3); min-width: 0; }
 .metaText { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
@@ -240,9 +261,11 @@
 }
 .meta dd { margin: 0; }
 
-.section { display: flex; flex-direction: column; gap: var(--space-4); }
+/* A section opens a new chapter: extra room above it, on top of the column
+   gap, so the figures that follow a section stay grouped with it. */
+.section { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-8); }
 /* Eyebrow: names the section above its subheader, and in the side nav. */
-.eyebrow { margin: 0 0 calc(-1 * var(--space-2)); }
+.eyebrow { margin: 0 0 var(--space-2); }
 .prose { display: flex; flex-direction: column; gap: var(--space-4); color: var(--ink-muted); font-size: 17px; line-height: 28px; }
 .prose strong { color: var(--ink); font-weight: 500; }
 .prose ul { margin: 0; padding-left: 1.2em; }
@@ -304,6 +327,9 @@
 @media (max-width: 639px) {
   .main { --case-top: calc(var(--space-8) + var(--space-4)); padding: var(--case-top) var(--space-4) var(--space-8); }
   .content { gap: var(--space-7); }
+  .section { margin-top: var(--space-7); }
+  /* Display type is too large for a phone; the title drops to the title size. */
+  .heroTitle { font-size: 32px; line-height: 38px; letter-spacing: -0.015em; }
   .page { --case-gutter: var(--space-3); }
   .nav { top: var(--space-3); }
   .outcomes { grid-template-columns: 1fr; }

@@ -69,7 +69,7 @@ export function CaseHero({
 }) {
   return (
     <header id="overview" data-toc="Overview" className={styles.hero}>
-      <h1 className="title">{title}</h1>
+      <h1 className={`display ${styles.heroTitle}`}>{title}</h1>
       {tags && tags.length > 0 && (
         <div className={styles.tags}>
           {tags.map((t) => (
