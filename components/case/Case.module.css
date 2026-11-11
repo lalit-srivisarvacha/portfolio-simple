@@ -1,6 +1,9 @@
 .page {
   /* Side gutter shared by the floating nav and the side nav on desktop. */
   --case-gutter: var(--space-6);
+  /* Width of the content column. Wider than the system's 720px --measure so
+     product shots get room; change it here, not the token. */
+  --case-measure: 880px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -124,11 +127,11 @@
   padding: var(--case-top) var(--space-5) var(--space-9);
 }
 
-/* One centered column on the 720px measure. Text and images alike stay
+/* One centered column capped at --case-measure. Text and images alike stay
    inside it; nothing breaks out. */
 .content {
   width: 100%;
-  max-width: var(--measure);
+  max-width: var(--case-measure);
   margin: 0 auto;
   min-width: 0;
   display: flex;
@@ -150,7 +153,7 @@
   .main {
     --toc-w: 184px;
     display: grid;
-    grid-template-columns: minmax(var(--toc-w), 1fr) minmax(0, var(--measure)) minmax(var(--toc-w), 1fr);
+    grid-template-columns: minmax(var(--toc-w), 1fr) minmax(0, var(--case-measure)) minmax(var(--toc-w), 1fr);
     column-gap: var(--space-6);
     align-items: start;
     padding-left: var(--case-gutter);
@@ -225,6 +228,8 @@
 .meta dd { margin: 0; }
 
 .section { display: flex; flex-direction: column; gap: var(--space-4); }
+/* Eyebrow: names the section above its subheader, and in the side nav. */
+.eyebrow { margin: 0 0 calc(-1 * var(--space-2)); }
 .prose { display: flex; flex-direction: column; gap: var(--space-4); color: var(--ink-muted); font-size: 17px; line-height: 28px; }
 .prose strong { color: var(--ink); font-weight: 500; }
 .prose ul { margin: 0; padding-left: 1.2em; }

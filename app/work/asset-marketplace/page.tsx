@@ -17,24 +17,23 @@ export default function Page() {
     <CasePage>
       <CaseHero
         title="Building an asset marketplace"
-        tags={["Product design", "[PLATFORM]"]}
         meta={[
-          { label: "Role", value: "[ROLE]" },
-          { label: "Timeline", value: "[YEAR]" },
+          { label: "Role", value: "Sole product designer" },
+          { label: "Timeline", value: "2026" },
           { label: "Company", value: "SimpleClosure" },
         ]}
       />
 
       <Figure caption="[Hero shot: the marketplace in context.]" aspect="16 / 9" />
 
-      <Section title="The problem">
+      <Section label="Problem" title="[Subheader: the problem in one line.]">
         <p>
           [Two or three sentences on what was broken, for whom, and how you knew. Quote a real founder or
           a real number if you have one.]
         </p>
       </Section>
 
-      <Section title="What I did">
+      <Section label="Approach" title="[Subheader: the direction you took.]">
         <p>
           [How you approached it: the constraint you chose to design around, the options you explored, and
           the one you shipped. Mention the decision you&apos;d defend hardest.]
@@ -48,7 +47,7 @@ export default function Page() {
 
       <Figure caption="[Before / after, or the key flow.]" />
 
-      <Section title="Outcome">
+      <Section label="Outcome" title="[Subheader: what changed.]">
         <p>[What changed after launch, and what you&apos;d do differently.]</p>
       </Section>
 

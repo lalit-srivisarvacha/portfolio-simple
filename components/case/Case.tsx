@@ -14,7 +14,7 @@ import styles from "./Case.module.css";
 
 const CONTENT_ID = "case-content";
 
-/** Turns a section title into a stable anchor id: "What I did" → "what-i-did". */
+/** Turns a section label into a stable anchor id: "What I did" → "what-i-did". */
 function slugify(text: string) {
   return text
     .toLowerCase()
@@ -87,24 +87,31 @@ export function CaseHero({
 }
 
 /**
- * A titled chunk of the story. Sections are space-8 apart. Each one gets an
- * anchor and a link in the side nav; pass `nav` for a shorter link label,
- * or `id` to pin the anchor if the title might change.
+ * A chunk of the story. Sections are space-8 apart. `label` is the eyebrow
+ * above the subheader: a short name for the section ("Problem", "Outcome")
+ * that also gives it its anchor and its link in the side nav. `title` is the
+ * subheader, free to say something specific. Pass `id` to pin the anchor if
+ * the label might change.
  */
 export function Section({
+  label,
   title,
-  nav,
   id,
   children,
 }: {
-  title: string;
-  nav?: string;
+  label: string;
+  title?: string;
   id?: string;
   children: ReactNode;
 }) {
+  const anchor = id ?? slugify(label);
+  const labelId = `${anchor}-label`;
   return (
-    <section id={id ?? slugify(title)} data-toc={nav ?? title} className={styles.section}>
-      <h2 className="heading">{title}</h2>
+    <section id={anchor} data-toc={label} aria-labelledby={labelId} className={styles.section}>
+      <p id={labelId} className={`mono-sm subtle ${styles.eyebrow}`}>
+        {label.toUpperCase()}
+      </p>
+      {title && <h2 className="heading">{title}</h2>}
       <div className={styles.prose}>{children}</div>
     </section>
   );
