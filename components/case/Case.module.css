@@ -348,8 +348,8 @@
 .splitMedia > img, .splitMedia > video { width: 100%; height: 100%; object-fit: cover; }
 @keyframes splitIn { from { opacity: 0; } }
 
-/* Tabs: a title over its text, each under a rule. The selected tab's rule and
-   title take the accent. */
+/* Tabs: a title over its text, each under a rule. The selected tab's title
+   takes the accent and its rule fills with it as a countdown to the next tab. */
 .tabs { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
 .tab {
   appearance: none;
@@ -360,15 +360,36 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  padding: var(--space-4) 0 0;
-  border-top: 2px solid var(--hairline);
+  padding: 0;
   text-align: left;
   font: inherit;
   color: var(--ink-muted);
   cursor: pointer;
-  transition: border-color var(--duration-base) var(--ease-standard);
 }
-.tab[aria-selected="true"] { border-top-color: var(--accent); cursor: default; }
+.tab[aria-selected="true"] { cursor: default; }
+.tabRule {
+  position: relative;
+  height: 2px;
+  margin-bottom: var(--space-2);
+  background: var(--hairline);
+  overflow: hidden;
+}
+/* The countdown: fast off the mark, easing to a stop as the switch nears.
+   When it ends the next tab is selected. */
+.tabProgress {
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform-origin: left;
+  animation: tabCountdown 8s cubic-bezier(0.25, 0.5, 0.35, 1) forwards;
+}
+@keyframes tabCountdown { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+/* Held while the section is off screen, under the pointer, or holding keyboard focus. */
+.split:not([data-inview]) .tabProgress,
+.split:has(:focus-visible) .tabProgress { animation-play-state: paused; }
+@media (hover: hover) {
+  .split:hover .tabProgress { animation-play-state: paused; }
+}
 .tabTitle { color: var(--ink-muted); transition: color var(--duration-fast) var(--ease-standard); }
 .tab:hover .tabTitle { color: var(--ink); }
 .tab[aria-selected="true"] .tabTitle { color: var(--accent); }
@@ -382,5 +403,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .splitMedia { animation: none; }
-  .tab, .tabTitle { transition: none; }
+  .tabTitle { transition: none; }
+  /* No countdown and no auto-switching: the rule is simply filled. */
+  .tabProgress { animation: none; }
 }
