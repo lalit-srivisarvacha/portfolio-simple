@@ -17,6 +17,7 @@ export default function Page() {
     <CasePage>
       <CaseHero
         title="Building an asset marketplace"
+        description="[One or two sentences on what the project was and who it was for.]"
         meta={[
           { label: "Role", value: "Sole product designer", icon: "user" },
           { label: "Timeline", value: "2026", icon: "calendar" },

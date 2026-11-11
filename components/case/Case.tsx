@@ -60,16 +60,20 @@ type Meta = { label: string; value: string; icon?: IconName; brand?: BrandId };
 
 export function CaseHero({
   title,
+  description,
   meta,
   tags,
 }: {
   title: string;
+  /** A sentence or two under the title on what the project was. */
+  description?: string;
   meta: Meta[];
   tags?: string[];
 }) {
   return (
     <header id="overview" data-toc="Overview" className={styles.hero}>
       <h1 className={`display ${styles.heroTitle}`}>{title}</h1>
+      {description && <p className={`body-lg muted ${styles.heroDescription}`}>{description}</p>}
       {tags && tags.length > 0 && (
         <div className={styles.tags}>
           {tags.map((t) => (
