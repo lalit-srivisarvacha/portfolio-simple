@@ -96,12 +96,14 @@ type Props = Omit<SVGProps<SVGSVGElement>, "ref"> & {
   size?: number;
   /** Accessible name; omit for decorative icons. */
   label?: string;
+  /** Regular everywhere in the interface. Light is for drawn figures only. */
+  weight?: "regular" | "light";
 };
 
-export function Icon({ name, size, label, ...rest }: Props) {
+export function Icon({ name, size, label, weight = "regular", ...rest }: Props) {
   const Glyph = ICONS[name];
   const a11y = label
     ? { role: "img", "aria-label": label }
     : { "aria-hidden": true as const };
-  return <Glyph weight="regular" size={size} {...a11y} {...rest} />;
+  return <Glyph weight={weight} size={size} {...a11y} {...rest} />;
 }

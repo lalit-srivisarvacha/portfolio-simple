@@ -64,7 +64,7 @@ export function SplitSection({
                   >
                     {item.title}
                     <span className={styles.accMark}>
-                      <Icon name="plus" size={14} />
+                      <Icon name="arrowRight" size={20} />
                     </span>
                   </button>
                 </h3>
@@ -75,7 +75,7 @@ export function SplitSection({
                   className={styles.accPanel}
                   inert={!isOpen}
                 >
-                  <div className={`body muted ${styles.accBody}`}>{item.body}</div>
+                  <div className={`body-lg muted ${styles.accBody}`}>{item.body}</div>
                 </div>
               </div>
             );

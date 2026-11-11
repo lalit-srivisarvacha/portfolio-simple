@@ -10,7 +10,7 @@ Personal portfolio for Lalit, Senior Product Designer (Los Angeles). Next.js App
 
 ## Rules of the system (don't break these)
 
-- Two tones, one hue. Page is `--bg`, surfaces are `--bg-surface`, text is `--ink` / `--ink-muted`. `--accent` (violet, taken from the asset marketplace deck) only for marks: the availability dot, link hover underline, focus ring. Never a section or button fill. The one place it does more is a drawn case-study figure (`app/work/<slug>/figures.tsx`), where it marks the parts the project is about, washes the well lightly, and raised pieces may carry a short soft shadow. Company brand colors only inside `Brandmark`. No decorative ornaments or pattern fills: the product shots are the only imagery.
+- Two tones, one hue. Page is `--bg`, surfaces are `--bg-surface`, text is `--ink` / `--ink-muted`. `--accent` (violet, taken from the asset marketplace deck) only for marks: the availability dot, link hover underline, focus ring, the open accordion's title and arrow. Never a section or button fill. The one place it does more is a drawn case-study figure (`app/work/<slug>/figures.tsx`), which follows the project's own deck: the accent may mark its key parts and raised pieces may carry a short soft shadow. Company brand colors only inside `Brandmark`. No decorative ornaments or pattern fills: the product shots are the only imagery.
 - Every interactive thing is a pill (`--radius-pill`). Cards and image wells are `--radius-md`. No square corners on controls.
 - No shadows except `--shadow-float` under a `Pill` that overlaps a card. Depth = one tint step.
 - Type is Geist 400/500 only. Nothing bold. Sizes come from the `.title` / `.heading` / `.body` … classes in `globals.css`; don't invent new font sizes.

@@ -1,7 +1,7 @@
 /* Figures for the asset marketplace case study. Everything is sized in
    container units, so a figure scales with its well like an image would.
-   Raised pills on a well washed with the accent; the accent marks the parts
-   this project is about. */
+   They follow the project deck: raised pills with a soft drop, and the accent
+   only where the deck uses it (the training flow). */
 
 .frame {
   position: absolute;
@@ -11,11 +11,6 @@
   display: grid;
   place-items: center;
   font-family: var(--font-sans);
-  /* Shared by every raised piece: a hairline edge and a short soft drop. */
-  --lift: 0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent), 0 6px 14px -8px rgba(12, 6, 34, 0.3);
-  background:
-    radial-gradient(70% 80% at 62% 30%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 70%),
-    radial-gradient(50% 60% at 12% 95%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
 }
 
 /* ── AssetHub fan ── */
@@ -34,14 +29,21 @@
   mask-image: linear-gradient(90deg, transparent 17%, #000 27%, #000 73%, transparent 83%);
 }
 .rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.rings path { fill: none; stroke: var(--hairline-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.rings path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 11%, transparent);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
 
 .hub,
 .fanPill {
   position: absolute;
   transform: translate(-50%, -50%);
   background: var(--bg-raised);
-  box-shadow: var(--lift);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ink) 7%, transparent),
+    0 0.5cqw 1.4cqw -0.5cqw rgba(12, 6, 34, 0.22);
 }
 .hub {
   width: 7.5cqw;
@@ -49,11 +51,8 @@
   border-radius: var(--radius-pill);
   display: grid;
   place-items: center;
-  color: var(--accent);
-  box-shadow:
-    0 0 0 1.5px var(--accent),
-    0 0 0 0.6cqw color-mix(in srgb, var(--accent) 14%, transparent),
-    0 1.4cqw 2.6cqw -1.2cqw var(--accent);
+  /* The deck's own green for the AssetHub mark; it is not a system token. */
+  color: #2e9e5b;
 }
 .hub svg { width: 46%; height: 46%; }
 .fanPill {
@@ -65,24 +64,12 @@
   border-radius: var(--radius-pill);
   font-size: max(1.43cqw, 9px);
   line-height: 1;
-  font-weight: 500;
+  letter-spacing: -0.005em;
   white-space: nowrap;
   color: var(--ink-muted);
   animation: pop 550ms var(--ease-standard) var(--d, 0ms) backwards;
 }
-.fanPill svg { width: 1.75cqw; height: 1.75cqw; flex: none; }
-/* The two asset types this project is about. */
-.fanPill.hot {
-  color: var(--ink);
-  height: 4.3cqw;
-  padding: 0 1.6cqw 0 1.3cqw;
-  font-size: max(1.6cqw, 10px);
-  box-shadow:
-    0 0 0 1.5px var(--accent),
-    0 0 0 0.5cqw color-mix(in srgb, var(--accent) 16%, transparent),
-    0 0.9cqw 2cqw -0.7cqw var(--accent);
-}
-.fanPill.hot svg { width: 2cqw; height: 2cqw; color: var(--accent); }
+.fanPill svg { width: 1.75cqw; height: 1.75cqw; flex: none; opacity: 0.85; }
 @keyframes pop { from { opacity: 0; transform: translate(-50%, -50%) scale(0.86); } }
 
 /* ── Training data flow ── */
@@ -97,7 +84,7 @@
 }
 .flowLines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .flowRings { animation: fade 1200ms ease 200ms backwards; }
-.flowRings circle { fill: none; stroke: var(--hairline-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.flowRings circle { fill: none; stroke: color-mix(in srgb, var(--ink) 10%, transparent); stroke-width: 1; vector-effect: non-scaling-stroke; }
 /* Dotted lines that keep moving toward the lab, then on to the output. */
 .wipe { animation: wipe var(--t, 700ms) cubic-bezier(0.45, 0, 0.2, 1) var(--d, 0ms) backwards; }
 .wipe path {
@@ -121,7 +108,9 @@
 .out {
   position: absolute;
   background: var(--bg-raised);
-  box-shadow: var(--lift);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--ink) 8%, transparent),
+    0 0.8cqw 2cqw -0.8cqw rgba(12, 6, 34, 0.25);
 }
 .flow svg:not(.flowLines) { flex: none; }
 .flowPill {
@@ -133,7 +122,6 @@
   padding: 0 2.2cqw 0 1.8cqw;
   border-radius: var(--radius-pill);
   font-size: max(2.4cqw, 9px);
-  font-weight: 500;
   white-space: nowrap;
   animation: inLeft 800ms var(--ease-standard) var(--d, 0ms) backwards;
 }
@@ -165,7 +153,7 @@
   animation: inCentre 900ms var(--ease-standard) var(--d, 0ms) backwards;
 }
 .lab svg { width: 4.2cqw; height: 4.2cqw; color: var(--accent); }
-.lab b { font-weight: 500; font-size: max(2.4cqw, 10px); }
+.lab b { font-weight: 400; font-size: max(2.4cqw, 10px); }
 .out {
   left: 71.6%;
   top: 50%;
@@ -192,7 +180,7 @@
 }
 .out > i svg { width: 3.3cqw; height: 3.3cqw; }
 .out > span { display: grid; gap: 0.8cqw; }
-.out b { font-weight: 500; font-size: max(2.5cqw, 11px); }
+.out b { font-weight: 400; font-size: max(2.5cqw, 11px); }
 .out em { font-style: normal; font-size: max(1.9cqw, 9px); color: var(--ink-muted); white-space: nowrap; }
 @keyframes inLeft { from { opacity: 0; transform: translate(calc(-100% - 2.2cqw), -50%); } }
 @keyframes inCentre { from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); } }

@@ -3,16 +3,16 @@ import type { CSSProperties } from "react";
 import styles from "./figures.module.css";
 
 /*
- * Drawn figures for the asset marketplace case study, in the page's own
- * tones. Each fills the image well it is placed in and plays a short
+ * Drawn figures for the asset marketplace case study, carried over from the
+ * project deck as they were drawn there. Each fills the image well it is placed in and plays a short
  * entrance when it mounts; under reduced motion it simply appears.
  */
 
-type FanPill = { label: string; icon: IconName; x: number; y: number; delay: number; hot?: boolean };
+type FanPill = { label: string; icon: IconName; x: number; y: number; delay: number };
 
 /* Positions are percentages of the 2:1 fan box; the hub sits at its bottom centre. */
 const FAN: FanPill[] = [
-  { label: "Codebases", icon: "code", x: 50, y: 52.14, delay: 120, hot: true },
+  { label: "Codebases", icon: "code", x: 50, y: 52.14, delay: 120 },
   { label: "Domains", icon: "globe", x: 34, y: 85.07, delay: 155 },
   { label: "Patents & IP", icon: "scroll", x: 39.34, y: 66.19, delay: 190 },
   { label: "Contracts", icon: "files", x: 60.66, y: 66.19, delay: 225 },
@@ -20,7 +20,7 @@ const FAN: FanPill[] = [
   { label: "Websites", icon: "monitor", x: 22.14, y: 70.44, delay: 435 },
   { label: "Physical hardware", icon: "hardDrives", x: 28.68, y: 49.53, delay: 470 },
   { label: "Inventory", icon: "stack", x: 36.54, y: 37.89, delay: 260 },
-  { label: "Workspace data", icon: "database", x: 50, y: 26.07, delay: 295, hot: true },
+  { label: "Workspace data", icon: "database", x: 50, y: 26.07, delay: 295 },
   { label: "Branding", icon: "dna", x: 63.46, y: 37.89, delay: 330 },
   { label: "LLM models", icon: "cpu", x: 71.32, y: 49.53, delay: 365 },
   { label: "Vendors", icon: "storefront", x: 77.86, y: 70.44, delay: 400 },
@@ -35,6 +35,7 @@ const FAN: FanPill[] = [
 ];
 
 const RINGS = [72, 134, 196, 258, 320, 382, 444, 506, 568];
+const RING_OPACITY = [1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.25];
 
 /** AssetHub at the centre, with the kinds of assets founders can sell fanning out around it. */
 export function AssetFan() {
@@ -47,19 +48,19 @@ export function AssetFan() {
       >
         <svg className={styles.rings} viewBox="0 0 1120 560" aria-hidden="true">
           {RINGS.map((r, i) => (
-            <path key={r} d={`M${560 - r} 508 A ${r} ${r} 0 0 1 ${560 + r} 508`} style={{ opacity: Math.max(0.25, 1 - i * 0.1) }} />
+            <path key={r} d={`M${560 - r} 508 A ${r} ${r} 0 0 1 ${560 + r} 508`} style={{ opacity: RING_OPACITY[i] }} />
           ))}
         </svg>
         <span className={styles.hub} style={{ left: "50%", top: "90.71%" }}>
-          <Icon name="tag" />
+          <Icon name="tag" weight="light" />
         </span>
         {FAN.map((p) => (
           <span
             key={p.label}
-            className={`${styles.fanPill} ${p.hot ? styles.hot : ""}`}
+            className={styles.fanPill}
             style={{ left: `${p.x}%`, top: `${p.y}%`, "--d": `${p.delay}ms` } as CSSProperties}
           >
-            <Icon name={p.icon} />
+            <Icon name={p.icon} weight="light" />
             {p.label}
           </span>
         ))}
@@ -100,23 +101,23 @@ export function TrainingFlow() {
           <path d="M606 320 L 716 320" />
         </svg>
         <span className={styles.flowPill} style={{ left: "29%", top: "30%", "--d": "280ms" } as CSSProperties}>
-          <Icon name="code" />
+          <Icon name="code" weight="light" />
           Codebases
         </span>
         <span className={styles.flowCap} style={{ left: "29%", top: "50%", "--d": "360ms" } as CSSProperties}>
           Training data
         </span>
         <span className={styles.flowPill} style={{ left: "29%", top: "70%", "--d": "440ms" } as CSSProperties}>
-          <Icon name="database" />
+          <Icon name="database" weight="light" />
           Workspace data
         </span>
         <span className={styles.lab} style={{ "--d": "1020ms" } as CSSProperties}>
-          <Icon name="flask" />
+          <Icon name="flask" weight="light" />
           <b>AI labs</b>
         </span>
         <span className={styles.out} style={{ "--d": "1680ms" } as CSSProperties}>
           <i>
-            <Icon name="sparkle" />
+            <Icon name="sparkle" weight="light" />
           </i>
           <span>
             <b>LLMs</b>
