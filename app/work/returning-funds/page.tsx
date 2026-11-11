@@ -26,7 +26,7 @@ export default function Page() {
         ]}
       />
 
-      <Figure caption="[Hero shot: the distribution flow a founder sees.]" seed={11} aspect="16 / 9" />
+      <Figure caption="[Hero shot: the distribution flow a founder sees.]" aspect="16 / 9" />
 
       <Section title="The problem">
         <p>
@@ -57,7 +57,7 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Figure caption="[Key screen: how a founder reviews who gets what.]" seed={17} />
+      <Figure caption="[Key screen: how a founder reviews who gets what.]" />
 
       <Section title="Making the numbers trustworthy">
         <p>
@@ -66,7 +66,7 @@ export default function Page() {
         </p>
       </Section>
 
-      <Figure caption="[The investor side: collecting payment details and confirming receipt.]" seed={23} />
+      <Figure caption="[The investor side: collecting payment details and confirming receipt.]" />
 
       <Section title="Outcome">
         <p>[What changed after launch, and what you&apos;d do differently.]</p>

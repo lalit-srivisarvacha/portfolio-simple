@@ -19,7 +19,6 @@
   --accent: #d93a1f;
   --on-accent: #ffffff;
   --accent-soft: #fdebe6;
-  --accent-warm: #f5a623;
   --focus-ring: var(--accent);
   --overlay: #0000007a;
   --shadow-float: 0 2px 4px 0 #00000014;
@@ -41,7 +40,6 @@
   --accent: #ff7b5e;
   --on-accent: #1a0b07;
   --accent-soft: #3a1a12;
-  --accent-warm: #f7b955;
   --focus-ring: var(--accent);
   --overlay: #000000a6;
   --shadow-float: 0 2px 4px 0 #00000080;
