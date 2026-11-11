@@ -14,19 +14,22 @@
 }
 
 /* ── AssetHub fan ── */
-/* Wider than the well on purpose: the outer ring runs off both sides and
-   fades, so the nearer asset types stay readable. */
+/* The whole fan shows when the well is wide enough. In a narrow well it
+   keeps a readable size instead, runs off both sides and fades there. */
 .fan {
   position: absolute;
   left: 50%;
   top: 50%;
-  /* Sits a little high so the hub clears the bottom edge of a 4:3 well. */
-  transform: translate(-50%, -56%);
-  width: 160cqw;
+  transform: translate(-50%, -50%);
+  width: max(min(100cqw, 100cqh * 2 - 2 * var(--space-5)), 660px);
   aspect-ratio: 2 / 1;
   container-type: inline-size;
-  -webkit-mask-image: linear-gradient(90deg, transparent 17%, #000 27%, #000 73%, transparent 83%);
-  mask-image: linear-gradient(90deg, transparent 17%, #000 27%, #000 73%, transparent 83%);
+}
+@media (max-width: 959px) {
+  .fan {
+    -webkit-mask-image: linear-gradient(90deg, transparent 22%, #000 32%, #000 68%, transparent 78%);
+    mask-image: linear-gradient(90deg, transparent 22%, #000 32%, #000 68%, transparent 78%);
+  }
 }
 .rings { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .rings path {
@@ -76,7 +79,7 @@
 .flow {
   position: relative;
   flex: none;
-  width: min(100cqw - 2 * var(--space-4), 100cqh * 1000 / 640);
+  width: min(100cqw - 2 * var(--space-4), 100cqh * 1000 / 640, 640px);
   aspect-ratio: 1000 / 640;
   container-type: inline-size;
   color: var(--ink);

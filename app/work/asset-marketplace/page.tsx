@@ -36,20 +36,20 @@ export default function Page() {
           {
             title: "AssetHub",
             body: (
-              <p>
+              <>
                 We launched AssetHub to help founders who are shutting down liquidate their company&apos;s
                 assets, from patents, domains and hardware to codebases and workspace data.
-              </p>
+              </>
             ),
             media: <AssetFan />,
           },
           {
             title: "AI opportunity",
             body: (
-              <p>
+              <>
                 AI labs wanted codebases and workspace data to train their models, and were signing $1M+
                 deals for batches of codebases. The market was growing quickly.
-              </p>
+              </>
             ),
             media: <TrainingFlow />,
           },

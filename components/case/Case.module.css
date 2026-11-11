@@ -333,13 +333,13 @@
   .outcomes { grid-template-columns: 1fr; }
 }
 
-/* ── SplitSection: intro on top; accordions left, one image well right ── */
+/* ── SplitSection: intro on top, one full-width image well, tabs under it ── */
 .splitIntro { max-width: var(--measure); }
 .split { margin-top: var(--space-7); display: flex; flex-direction: column; gap: var(--space-5); }
 .splitStage {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   background: var(--bg-surface);
   overflow: hidden;
@@ -348,59 +348,39 @@
 .splitMedia > img, .splitMedia > video { width: 100%; height: 100%; object-fit: cover; }
 @keyframes splitIn { from { opacity: 0; } }
 
-@media (min-width: 960px) {
-  .split {
-    display: grid;
-    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-    column-gap: var(--space-7);
-    align-items: start;
-  }
-}
-
-.accordion { border-top: 1px solid var(--hairline); }
-.accItem { border-bottom: 1px solid var(--hairline); }
-.accHeading { margin: 0; }
-.accButton {
+/* Tabs: a title over its text, each under a rule. The selected tab's rule and
+   title take the accent. */
+.tabs { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+.tab {
   appearance: none;
   border: 0;
+  border-radius: 0;
   background: transparent;
-  width: 100%;
+  min-width: 0;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-4);
-  padding: var(--space-5) 0;
-  color: var(--ink-muted);
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4) 0 0;
+  border-top: 2px solid var(--hairline);
   text-align: left;
+  font: inherit;
+  color: var(--ink-muted);
   cursor: pointer;
-  border-radius: var(--radius-sm);
-  transition: color var(--duration-fast) var(--ease-standard);
+  transition: border-color var(--duration-base) var(--ease-standard);
 }
-.accButton:hover { color: var(--ink); }
-/* The open item is named in the accent, with an arrow pointing at the well. */
-.accButton[aria-expanded="true"] { color: var(--accent); cursor: default; }
-.accMark {
-  flex: none;
-  display: inline-flex;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateX(calc(-1 * var(--space-2)));
-  transition:
-    opacity var(--duration-base) var(--ease-standard),
-    transform var(--duration-base) var(--ease-standard);
+.tab[aria-selected="true"] { border-top-color: var(--accent); cursor: default; }
+.tabTitle { color: var(--ink-muted); transition: color var(--duration-fast) var(--ease-standard); }
+.tab:hover .tabTitle { color: var(--ink); }
+.tab[aria-selected="true"] .tabTitle { color: var(--accent); }
+.tabBody { color: var(--ink-muted); }
+
+@media (min-width: 960px) {
+  .splitStage { aspect-ratio: 16 / 9; }
+  .tabs { grid-template-columns: repeat(var(--tabs, 2), minmax(0, 1fr)); gap: var(--space-6); }
+  .tabBody { max-width: 44ch; }
 }
-.accButton[aria-expanded="true"] .accMark { opacity: 1; transform: none; }
-.accPanel {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows var(--duration-base) var(--ease-standard);
-}
-.accItem[data-open] .accPanel { grid-template-rows: 1fr; }
-.accBody { min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: var(--space-3); }
-.accBody > :last-child { padding-bottom: var(--space-5); }
-.accBody p { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .splitMedia { animation: none; }
-  .accPanel, .accMark, .accButton { transition: none; }
+  .tab, .tabTitle { transition: none; }
 }
