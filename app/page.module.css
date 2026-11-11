@@ -22,18 +22,30 @@
 }
 
 /* On tall, wide monitors a full-width 3:2 card fills the whole viewport. Cap each card's
-   width by the viewport height so it stays 3:2 and the next card peeks in below:
-   height = 100dvh − top padding − gap − peek, width = height × 3/2.
-   The whole layout (sidebar + cards) is capped to match and centered, so very wide
-   screens get even space on both sides instead of a gap on the right. */
+   width by the viewport height so it stays 3:2 and the next card peeks in below
+   (height = 100dvh − top padding − gap − peek, width = height × 3/2), and never wider
+   than 1280px. The whole layout (sidebar + cards) is capped to match and centered, so
+   very wide screens get even space on both sides instead of a gap on the right. */
 @media (min-width: 960px) {
   .home {
-    --card-max: calc((100dvh - var(--space-3) - var(--space-6) - var(--space-9)) * 3 / 2);
-    max-width: calc(var(--sidebar-w) + var(--card-max) + var(--space-3));
+    --work-inset: 0px;
+    --card-max: min(
+      calc((100dvh - var(--space-3) - var(--space-6) - var(--space-9)) * 3 / 2),
+      1280px
+    );
+    max-width: calc(var(--sidebar-w) + var(--work-inset) + var(--card-max) + var(--space-3));
     margin-inline: auto;
+  }
+  .work {
+    padding-left: var(--work-inset);
   }
   .work > * {
     width: 100%;
     max-width: var(--card-max);
   }
+}
+
+/* Bigger screens: more air between the sidebar and the cards. */
+@media (min-width: 1440px) {
+  .home { --work-inset: var(--space-8); }
 }
