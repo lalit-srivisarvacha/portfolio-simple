@@ -51,7 +51,7 @@ export type Project = {
 
 /** Order here is display order on the home page. [CHECK] brands are placeholders; match each to its project. */
 export const projects: Project[] = [
-  { slug: "project-01", title: "[Product title]", brand: "simpleclosure", summary: "[One line on what this work changed.]" },
+  { slug: "asset-marketplace", title: "Building an asset marketplace", brand: "simpleclosure", summary: "[One line on what this work changed.]" },
   { slug: "project-02", title: "[Product title]", brand: "rev", summary: "[One line on what this work changed.]", placeholder: "square" },
   { slug: "project-03", title: "[Product title]", brand: "oscar", summary: "[One line on what this work changed.]" },
   { slug: "project-04", title: "[Product title]", brand: "sleepreset", summary: "[One line on what this work changed.]", placeholder: "square" },
