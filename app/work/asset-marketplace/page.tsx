@@ -18,9 +18,9 @@ export default function Page() {
       <CaseHero
         title="Building an asset marketplace"
         meta={[
-          { label: "Role", value: "Sole product designer" },
-          { label: "Timeline", value: "2026" },
-          { label: "Company", value: "SimpleClosure" },
+          { label: "Role", value: "Sole product designer", icon: "user" },
+          { label: "Timeline", value: "2026", icon: "calendar" },
+          { label: "Company", value: "SimpleClosure", brand: "simpleclosure" },
         ]}
       />
 

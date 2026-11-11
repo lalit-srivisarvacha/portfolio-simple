@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Icon, Pill, ScreenPlaceholder, ThemeToggle } from "@/components/ui";
+import { Brandmark, Icon, Pill, ScreenPlaceholder, ThemeToggle, type BrandId, type IconName } from "@/components/ui";
 import { site } from "@/content/site";
 import { CaseSwitcher } from "./CaseSwitcher";
 import { CaseToc } from "./CaseToc";
@@ -51,7 +51,12 @@ export function CasePage({ children }: { children: ReactNode }) {
   );
 }
 
-type Meta = { label: string; value: string };
+/**
+ * One fact under the title. `brand` puts the company's mark in its own color
+ * in the circle; `icon` puts a line icon in a neutral one. Leave both out for
+ * a plain label and value.
+ */
+type Meta = { label: string; value: string; icon?: IconName; brand?: BrandId };
 
 export function CaseHero({
   title,
@@ -76,9 +81,18 @@ export function CaseHero({
       )}
       <dl className={styles.meta}>
         {meta.map((m) => (
-          <div key={m.label}>
-            <dt className="mono-sm subtle">{m.label.toUpperCase()}</dt>
-            <dd className="body-sm">{m.value}</dd>
+          <div key={m.label} className={styles.metaItem}>
+            {m.brand ? (
+              <Brandmark brand={m.brand} size={40} />
+            ) : m.icon ? (
+              <span className={styles.metaIcon}>
+                <Icon name={m.icon} size={16} />
+              </span>
+            ) : null}
+            <div className={styles.metaText}>
+              <dt className="mono-sm subtle">{m.label.toUpperCase()}</dt>
+              <dd className="body-sm">{m.value}</dd>
+            </div>
           </div>
         ))}
       </dl>

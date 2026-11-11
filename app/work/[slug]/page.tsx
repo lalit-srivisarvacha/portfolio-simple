@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseHero, CasePage, Figure, Section } from "@/components/case/Case";
+import { BRANDS } from "@/components/ui";
 import { projects } from "@/content/site";
 
 /*
@@ -29,8 +30,9 @@ export default async function Page({ params }: PageProps<"/work/[slug]">) {
       <CaseHero
         title={p.title}
         meta={[
-          { label: "Role", value: "[ROLE]" },
-          { label: "Timeline", value: "[YEAR]" },
+          { label: "Role", value: "[ROLE]", icon: "user" },
+          { label: "Timeline", value: "[YEAR]", icon: "calendar" },
+          { label: "Company", value: BRANDS[p.brand].name, brand: p.brand },
         ]}
       />
       <Figure aspect="16 / 9" />

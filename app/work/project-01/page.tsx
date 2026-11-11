@@ -19,9 +19,9 @@ export default function Page() {
       <CaseHero
         title="Project 01"
         meta={[
-          { label: "Role", value: "Lead product designer" },
-          { label: "Timeline", value: "2024 — 2025" },
-          { label: "Company", value: "[COMPANY]" },
+          { label: "Role", value: "Lead product designer", icon: "user" },
+          { label: "Timeline", value: "2024 — 2025", icon: "calendar" },
+          { label: "Company", value: "[COMPANY]", brand: "simpleclosure" },
         ]}
       />
 
