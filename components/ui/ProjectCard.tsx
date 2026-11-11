@@ -13,7 +13,7 @@ export type ProjectCardProps = {
   /** Company the work was for; its brandmark leads the chip. */
   brand: BrandId;
   href: string;
-  /** Product shot in /public, centered in the well at its own aspect ratio. */
+  /** Product shot in /public, centered in the well at its own aspect ratio. Landscape or square only. */
   image?: string;
   imageAlt?: string;
   /** Looping product animation (mp4/webm) in /public, centered like an image. */

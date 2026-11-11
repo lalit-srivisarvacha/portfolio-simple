@@ -32,7 +32,8 @@ export type Project = {
   brand: BrandId;
   /**
    * Product shot in /public/work/<slug>/, centered in the card at its own aspect ratio:
-   * a real screen of the product (web app, dashboard, phone screens), not a mood image.
+   * a real screen of the product (web app, dashboard, a panel or card from the UI), not a
+   * mood image. Landscape or square only; a portrait shot comes out too small in the card.
    * Omit image and video and a blank app screen holds the place.
    */
   image?: string;
@@ -44,16 +45,16 @@ export type Project = {
   poster?: string;
   /** Fill the card edge to edge instead of centering the shot. */
   bleed?: boolean;
-  /** Blank screen shown until there is an image or video: "desktop" (default) or "phone". */
+  /** Blank screen shown until there is an image or video: "desktop" (16:10, default) or "square". */
   placeholder?: ScreenKind;
 };
 
 /** Order here is display order on the home page. [CHECK] brands are placeholders; match each to its project. */
 export const projects: Project[] = [
   { slug: "project-01", title: "[Product title]", brand: "simpleclosure", summary: "[One line on what this work changed.]" },
-  { slug: "project-02", title: "[Product title]", brand: "rev", summary: "[One line on what this work changed.]", placeholder: "phone" },
+  { slug: "project-02", title: "[Product title]", brand: "rev", summary: "[One line on what this work changed.]", placeholder: "square" },
   { slug: "project-03", title: "[Product title]", brand: "oscar", summary: "[One line on what this work changed.]" },
-  { slug: "project-04", title: "[Product title]", brand: "sleepreset", summary: "[One line on what this work changed.]", placeholder: "phone" },
+  { slug: "project-04", title: "[Product title]", brand: "sleepreset", summary: "[One line on what this work changed.]", placeholder: "square" },
   { slug: "project-05", title: "[Product title]", brand: "gojilabs", summary: "[One line on what this work changed.]" },
   { slug: "project-06", title: "[Product title]", brand: "simpleclosure", summary: "[One line on what this work changed.]" },
 ];

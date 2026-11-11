@@ -32,6 +32,6 @@ Personal portfolio for Lalit, Senior Product Designer (Los Angeles). Next.js App
 ## Working here
 
 - `npm run dev` / `npm run build` / `npm run lint`. Run `npm run build` before finishing any change.
-- Images go in `public/work/<slug>/` at 3:2 (cards) or 16:9 (case hero), served through `next/image`. Card images are real product UI (web app screens, dashboards, phone screens) on a plain background, centered in the well; think kevinbhagat.com's cards. Until one exists, `ScreenPlaceholder` (a blank desktop or phone screen in the page's own tones) holds the place; pick the kind with `placeholder` in `content/site.ts`.
+- Images go in `public/work/<slug>/` at 3:2 (cards) or 16:9 (case hero), served through `next/image`. Card images are real product UI (web app screens, dashboards, a panel lifted from the UI) on a plain background, centered in the well; think kevinbhagat.com's cards. **Landscape or square only** — never portrait (no tall phone screens); show mobile work as a landscape composition. The shot takes about 78% of the card's width and enlarges slightly (scale 1.03, 200ms) on hover. Until a shot exists, `ScreenPlaceholder` (a blank 16:10 desktop or 1:1 panel in the page's own tones) holds the place; pick the kind with `placeholder` in `content/site.ts`.
 - Placeholders are written `[LIKE THIS]`; search for `[` before shipping.
 - Motion: 120ms fills, 200ms theme/image fades, easing `cubic-bezier(0.2, 0, 0, 1)`. If richer motion is added later (Framer Motion, scroll scenes, WebGL), keep it inside product shots and the case hero, and off body text.
