@@ -10,7 +10,7 @@ Personal portfolio for Lalit, Senior Product Designer (Los Angeles). Next.js App
 
 ## Rules of the system (don't break these)
 
-- Two tones, one hue. Page is `--bg`, surfaces are `--bg-surface`, text is `--ink` / `--ink-muted`. `--accent` (coral) only for marks: the availability dot, link hover underline, focus ring. Never a section or button fill. `--accent-warm` (amber) only inside `PixelBlock`. Company brand colors only inside `Brandmark`.
+- Two tones, one hue. Page is `--bg`, surfaces are `--bg-surface`, text is `--ink` / `--ink-muted`. `--accent` (coral) only for marks: the availability dot, link hover underline, focus ring. Never a section or button fill. Company brand colors only inside `Brandmark`. No decorative ornaments or pattern fills: the product shots are the only imagery.
 - Every interactive thing is a pill (`--radius-pill`). Cards and image wells are `--radius-md`. No square corners on controls.
 - No shadows except `--shadow-float` under a `Pill` that overlaps a card. Depth = one tint step.
 - Type is Geist 400/500 only. Nothing bold. Sizes come from the `.title` / `.heading` / `.body` … classes in `globals.css`; don't invent new font sizes.
@@ -27,11 +27,11 @@ Personal portfolio for Lalit, Senior Product Designer (Los Angeles). Next.js App
 
 ## Components (`components/ui`)
 
-`Button`, `IconButton`, `Pill`, `ProjectCard`, `Brandmark`, `Avatar`, `ThemeToggle`, `PixelBlock`, `Icon`. Class names (`lds-*`) match the design system's stylesheet on purpose — keep them in sync rather than forking styles. Icons are Lucide-style paths in `Icon.tsx`; add paths there, never emoji or icon fonts. Company marks live in `BRANDS` in `Brandmark.tsx` (the company's own SVG path, well color and mark color from its LinkedIn avatar); a project names one by id. Never redraw a mark.
+`Button`, `IconButton`, `Pill`, `ProjectCard`, `Brandmark`, `Avatar`, `ThemeToggle`, `ScreenPlaceholder`, `Icon`. Class names (`lds-*`) match the design system's stylesheet on purpose — keep them in sync rather than forking styles. Icons are Lucide-style paths in `Icon.tsx`; add paths there, never emoji or icon fonts. Company marks live in `BRANDS` in `Brandmark.tsx` (the company's own SVG path, well color and mark color from its LinkedIn avatar); a project names one by id. Never redraw a mark.
 
 ## Working here
 
 - `npm run dev` / `npm run build` / `npm run lint`. Run `npm run build` before finishing any change.
-- Images go in `public/work/<slug>/` at 3:2 (cards) or 16:9 (case hero), served through `next/image`.
+- Images go in `public/work/<slug>/` at 3:2 (cards) or 16:9 (case hero), served through `next/image`. Card images are real product UI (web app screens, dashboards, phone screens) on a plain background, centered in the well; think kevinbhagat.com's cards. Until one exists, `ScreenPlaceholder` (a blank desktop or phone screen in the page's own tones) holds the place; pick the kind with `placeholder` in `content/site.ts`.
 - Placeholders are written `[LIKE THIS]`; search for `[` before shipping.
-- Motion: 120ms fills, 200ms theme/image fades, easing `cubic-bezier(0.2, 0, 0, 1)`. If richer motion is added later (Framer Motion, scroll scenes, WebGL), keep it inside `PixelBlock`/hero territory and off body text.
+- Motion: 120ms fills, 200ms theme/image fades, easing `cubic-bezier(0.2, 0, 0, 1)`. If richer motion is added later (Framer Motion, scroll scenes, WebGL), keep it inside product shots and the case hero, and off body text.

@@ -24,7 +24,7 @@ npm run lint
 | `app/page.tsx` + `components/site/Sidebar.tsx` | Home page: sticky full-height bio, scrolling work column. |
 | `app/work/<slug>/page.tsx` | One hand-coded case study per project. `project-01` is the template. |
 | `components/case/Case.tsx` | Case-study building blocks: hero, section, figure, outcomes. |
-| `components/ui/` | Button, IconButton, Pill, ProjectCard, Avatar, ThemeToggle, PixelBlock, Icon. |
+| `components/ui/` | Button, IconButton, Pill, ProjectCard, Avatar, ThemeToggle, ScreenPlaceholder, Icon. |
 | `app/globals.css` | Design tokens (light/dark), type scale, base styles. |
 | `components/ui/components.css` | Component styles, mirroring the design system's stylesheet. |
 | `CLAUDE.md` | Rules of the system for Claude Code. |

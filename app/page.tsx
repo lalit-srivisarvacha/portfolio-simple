@@ -19,7 +19,7 @@ export default function Home() {
             video={p.video}
             poster={p.poster}
             bleed={p.bleed}
-            seed={p.seed}
+            placeholder={p.placeholder}
             priority={i < 2}
           />
         ))}

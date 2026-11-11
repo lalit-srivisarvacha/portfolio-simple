@@ -282,19 +282,62 @@
 .lds-toggle[aria-checked="true"]:hover .lds-toggle__slot--light { background: var(--hairline); color: var(--ink); }
 .lds-toggle svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
-/* ---------- PixelBlock ---------- */
-.lds-pixels {
-  display: grid;
-  gap: 2px;
-  border-radius: var(--radius-md);
+/* ---------- ScreenPlaceholder ---------- */
+/* A blank app screen standing in for a product shot. The stage is a size container,
+   so the screen fits it at its own aspect ratio like an object-fit: contain image. */
+.lds-card__stage,
+.lds-screen-well { container-type: size; }
+.lds-screen {
+  display: flex;
+  gap: var(--space-2);
+  background: var(--bg);
+  border: 1px solid var(--hairline);
   overflow: hidden;
-  background: var(--bg-surface);
-  padding: 2px;
 }
-.lds-pixels i { display: block; aspect-ratio: 1; border-radius: 2px; background: var(--bg-surface); }
-.lds-pixels i[data-l="1"] { background: var(--accent-soft); }
-.lds-pixels i[data-l="2"] { background: var(--accent-warm); }
-.lds-pixels i[data-l="3"] { background: var(--accent); }
+.lds-screen i { display: block; height: 6px; width: 64%; border-radius: var(--radius-pill); background: var(--hairline-strong); }
+.lds-screen i.lds-screen__title { width: 40%; height: 8px; background: var(--ink); }
+.lds-screen b { display: block; border-radius: var(--radius-sm); background: var(--bg-surface); }
+.lds-screen--desktop {
+  width: min(100cqw, 100cqh * 1.6);
+  aspect-ratio: 16 / 10;
+  gap: 0;
+  border-radius: var(--radius-md);
+}
+.lds-screen__side {
+  flex: 0 0 22%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-right: 1px solid var(--hairline);
+}
+.lds-screen__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4);
+}
+.lds-screen__stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); height: 24%; }
+.lds-screen__table { flex: 1; }
+.lds-screen--phone {
+  width: min(100cqw, 100cqh * 0.4615);
+  aspect-ratio: 9 / 19.5;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-3) var(--space-3);
+  border-radius: var(--radius-lg);
+}
+.lds-screen--phone .lds-screen__hero { flex: 0 0 32%; }
+.lds-screen--phone b { flex: 0 0 12%; }
+.lds-screen--phone .lds-screen__cta { flex: 0 0 7%; margin-top: auto; border-radius: var(--radius-pill); background: var(--ink); }
+@media (max-width: 959px) {
+  .lds-screen__side, .lds-screen__main { padding: var(--space-3); gap: var(--space-2); }
+  .lds-screen__stats { gap: var(--space-2); }
+  .lds-screen--phone { padding: var(--space-3) var(--space-2) var(--space-2); gap: var(--space-1); border-radius: var(--radius-md); }
+  .lds-screen--phone i { height: 4px; }
+  .lds-screen--phone i.lds-screen__title { height: 6px; }
+}
 
 /* ---------- Text helpers ---------- */
 .lds-muted { color: var(--ink-muted); }

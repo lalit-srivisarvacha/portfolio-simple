@@ -5,7 +5,7 @@ import { BRANDS, Brandmark, type BrandId } from "./Brandmark";
 import { CardVideo } from "./CardVideo";
 import { Icon } from "./Icon";
 import { Pill } from "./Pill";
-import { PixelBlock } from "./PixelBlock";
+import { ScreenPlaceholder, type ScreenKind } from "./ScreenPlaceholder";
 
 export type ProjectCardProps = {
   /** Product name — the chip's text, next to the company brandmark. */
@@ -24,15 +24,15 @@ export type ProjectCardProps = {
   bleed?: boolean;
   /** Any element to place in the media well instead of an image or video. */
   media?: ReactNode;
-  /** Seed for the placeholder tiles when there is no media. */
-  seed?: number;
+  /** Which blank screen stands in for the shot until there is media. */
+  placeholder?: ScreenKind;
   priority?: boolean;
 };
 
 /**
  * One case study on the home page: a radius-md well on bg-surface with the product shot
  * or animation centered inside, and a chip in the bottom-left corner with the company
- * brandmark and the product title. The company name stays in the link's accessible name.
+ * brandmark and the product title. With no media yet, a blank app screen holds the place. The company name stays in the link's accessible name.
  * The whole card is the link.
  */
 export function ProjectCard({
@@ -45,32 +45,23 @@ export function ProjectCard({
   poster,
   bleed,
   media,
-  seed = 7,
+  placeholder = "desktop",
   priority,
 }: ProjectCardProps) {
-  const hasShot = Boolean(media || video || image);
 
   return (
     <Link href={href} className="lds-card" aria-label={`${BRANDS[brand].name}, ${title}`}>
       <div className={["lds-card__media", bleed && "lds-card__media--bleed"].filter(Boolean).join(" ")}>
-        {hasShot ? (
-          <div className="lds-card__stage">
-            {media ??
-              (video ? (
-                <CardVideo src={video} poster={poster} label={imageAlt || undefined} />
-              ) : (
-                <Image
-                  src={image!}
-                  alt={imageAlt}
-                  fill
-                  sizes="(max-width: 959px) 100vw, 60vw"
-                  priority={priority}
-                />
-              ))}
-          </div>
-        ) : (
-          <PixelBlock cols={30} rows={12} density={0.32} seed={seed} style={{ height: "100%", alignContent: "center" }} />
-        )}
+        <div className="lds-card__stage">
+          {media ??
+            (video ? (
+              <CardVideo src={video} poster={poster} label={imageAlt || undefined} />
+            ) : image ? (
+              <Image src={image} alt={imageAlt} fill sizes="(max-width: 959px) 100vw, 60vw" priority={priority} />
+            ) : (
+              <ScreenPlaceholder kind={placeholder} />
+            ))}
+        </div>
       </div>
       <Pill className="lds-card__label" mark={<Brandmark brand={brand} size={24} />}>
         <span className="lds-card__product">{title}</span>
