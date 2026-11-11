@@ -25,7 +25,8 @@ export default function Page() {
         ]}
       />
 
-      <Figure caption="[Hero shot: the marketplace in context.]" aspect="16 / 9" />
+      {/* Hero shot: the marketplace in context */}
+      <Figure aspect="16 / 9" />
 
       <Section label="Problem" title="[Subheader: the problem in one line.]">
         <p>
@@ -46,7 +47,8 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Figure caption="[Before / after, or the key flow.]" />
+      {/* Before / after, or the key flow */}
+      <Figure />
 
       <Section label="Outcome" title="[Subheader: what changed.]">
         <p>[What changed after launch, and what you&apos;d do differently.]</p>
