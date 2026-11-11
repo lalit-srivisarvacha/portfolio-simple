@@ -72,17 +72,19 @@ export function CaseHero({
 }) {
   return (
     <header id="overview" data-toc="Overview" className={styles.hero}>
-      <h1 className={`display ${styles.heroTitle}`}>{title}</h1>
-      {description && <p className={`body-lg muted ${styles.heroDescription}`}>{description}</p>}
-      {tags && tags.length > 0 && (
-        <div className={styles.tags}>
-          {tags.map((t) => (
-            <Pill key={t} variant="flat">
-              {t}
-            </Pill>
-          ))}
-        </div>
-      )}
+      <div className={styles.heroText}>
+        <h1 className={`display ${styles.heroTitle}`}>{title}</h1>
+        {description && <p className={`body-lg muted ${styles.heroDescription}`}>{description}</p>}
+        {tags && tags.length > 0 && (
+          <div className={styles.tags}>
+            {tags.map((t) => (
+              <Pill key={t} variant="flat">
+                {t}
+              </Pill>
+            ))}
+          </div>
+        )}
+      </div>
       <dl className={styles.meta}>
         {meta.map((m) => (
           <div key={m.label} className={styles.metaItem}>
