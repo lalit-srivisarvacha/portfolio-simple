@@ -20,3 +20,13 @@
     gap: var(--space-5);
   }
 }
+
+/* On tall, wide monitors a full-width 3:2 card fills the whole viewport. Cap each card's
+   width by the viewport height so it stays 3:2 and the next card peeks in below:
+   height = 100dvh − top padding − gap − peek, width = height × 3/2. */
+@media (min-width: 960px) {
+  .work > * {
+    width: 100%;
+    max-width: calc((100dvh - var(--space-3) - var(--space-6) - var(--space-9)) * 3 / 2);
+  }
+}
