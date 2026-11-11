@@ -26,7 +26,7 @@ export default function Page() {
         ]}
       />
 
-      <Figure caption="[Hero shot: the finished product in context.]" seed={3} aspect="16 / 9" />
+      <Figure caption="[Hero shot: the finished product in context.]" aspect="16 / 9" />
 
       <Section title="The problem">
         <p>
@@ -47,7 +47,7 @@ export default function Page() {
         </ul>
       </Section>
 
-      <Figure caption="[Before / after, or the key flow.]" seed={9} />
+      <Figure caption="[Before / after, or the key flow.]" />
 
       <Section title="Outcome">
         <p>[What changed after launch, and what you&apos;d do differently.]</p>

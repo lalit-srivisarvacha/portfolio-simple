@@ -33,7 +33,7 @@ export default async function Page({ params }: PageProps<"/work/[slug]">) {
           { label: "Timeline", value: "[YEAR]" },
         ]}
       />
-      <Figure seed={p.seed} aspect="16 / 9" />
+      <Figure aspect="16 / 9" />
       <Section title="Case study coming soon">
         <p>
           This project is listed but not written up yet. Copy <strong>app/work/project-01</strong> to{" "}

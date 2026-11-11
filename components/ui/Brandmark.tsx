@@ -20,9 +20,8 @@ type BrandSpec = {
 };
 
 /**
- * The companies whose work is on the site. Brand colors live here and nowhere else,
- * the same way accent-warm stays inside PixelBlock. Paths are the companies' own marks;
- * never redraw one. A company with no SVG uses its supplied image (`src`); with neither,
+ * The companies whose work is on the site. Brand colors live here and nowhere else.
+ * Paths are the companies' own marks; never redraw one. A company with no SVG uses its supplied image (`src`); with neither,
  * its initial shows.
  */
 export const BRANDS = {

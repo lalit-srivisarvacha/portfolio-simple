@@ -1,6 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { Icon, Pill, PixelBlock, ThemeToggle } from "@/components/ui";
+import { Icon, Pill, ScreenPlaceholder, ThemeToggle } from "@/components/ui";
 import { site } from "@/content/site";
 import { CaseSwitcher } from "./CaseSwitcher";
 import { CaseToc } from "./CaseToc";
@@ -112,23 +112,25 @@ export function Section({
 
 /**
  * An image (or any media) in a radius-md well, the full width of the
- * content column. Falls back to a pixel-block placeholder.
+ * content column. Falls back to a blank app screen until the image is in.
  */
 export function Figure({
   children,
   caption,
-  seed = 5,
   aspect = "3 / 2",
 }: {
   children?: ReactNode;
   caption?: string;
-  seed?: number;
   aspect?: string;
 }) {
   return (
     <figure className={styles.figure}>
       <div className={styles.well} style={{ aspectRatio: aspect }}>
-        {children ?? <PixelBlock cols={32} rows={12} density={0.3} seed={seed} style={{ height: "100%", alignContent: "center" }} />}
+        {children ?? (
+          <div className={`lds-screen-well ${styles.placeholder}`}>
+            <ScreenPlaceholder />
+          </div>
+        )}
       </div>
       {caption && <figcaption className="body-sm subtle">{caption}</figcaption>}
     </figure>
