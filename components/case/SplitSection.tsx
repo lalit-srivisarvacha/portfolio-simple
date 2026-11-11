@@ -15,10 +15,11 @@ export type SplitItem = {
 };
 
 /**
- * A two-column section: eyebrow, subheader, intro and a set of accordions on
- * the left; one image well on the right that shows the open accordion's
- * media. One accordion is always open, so the well is never empty. Below
- * 960px the well drops under the text.
+ * A section whose body is two columns: the eyebrow, subheader and intro run
+ * full width on top; below them a set of accordions sits on the left and one
+ * image well on the right, showing the open accordion's media. One accordion
+ * is always open, so the well is never empty. Below 960px the well drops
+ * under the accordions.
  */
 export function SplitSection({
   label,
@@ -40,13 +41,13 @@ export function SplitSection({
   const labelId = `${anchor}-label`;
 
   return (
-    <section id={anchor} data-toc={label} aria-labelledby={labelId} className={`${styles.section} ${styles.split}`}>
-      <div className={styles.splitText}>
-        <p id={labelId} className={`mono-sm subtle ${styles.eyebrow}`}>
-          {label.toUpperCase()}
-        </p>
-        {title && <h2 className="heading">{title}</h2>}
-        {children && <div className={styles.prose}>{children}</div>}
+    <section id={anchor} data-toc={label} aria-labelledby={labelId} className={styles.section}>
+      <p id={labelId} className={`mono-sm subtle ${styles.eyebrow}`}>
+        {label.toUpperCase()}
+      </p>
+      {title && <h2 className="heading">{title}</h2>}
+      {children && <div className={`${styles.prose} ${styles.splitIntro}`}>{children}</div>}
+      <div className={styles.split}>
         <div className={styles.accordion}>
           {items.map((item, i) => {
             const isOpen = i === open;
@@ -80,11 +81,11 @@ export function SplitSection({
             );
           })}
         </div>
-      </div>
-      <div className={styles.splitStage}>
-        {/* Keyed so the media remounts, and its entrance replays, on every switch. */}
-        <div key={open} className={styles.splitMedia}>
-          {items[open]?.media}
+        <div className={styles.splitStage}>
+          {/* Keyed so the media remounts, and its entrance replays, on every switch. */}
+          <div key={open} className={styles.splitMedia}>
+            {items[open]?.media}
+          </div>
         </div>
       </div>
     </section>

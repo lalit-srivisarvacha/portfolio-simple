@@ -16,9 +16,9 @@
   --ink-inverse: #ffffff;
   --hairline: #0000000f;
   --hairline-strong: #00000033;
-  --accent: #d93a1f;
+  --accent: #5a3fd1;
   --on-accent: #ffffff;
-  --accent-soft: #fdebe6;
+  --accent-soft: #eeecfa;
   --focus-ring: var(--accent);
   --overlay: #0000007a;
   --shadow-float: 0 2px 4px 0 #00000014;
@@ -37,9 +37,9 @@
   --ink-inverse: #0a0a0a;
   --hairline: #ffffff1a;
   --hairline-strong: #ffffff4d;
-  --accent: #ff7b5e;
-  --on-accent: #1a0b07;
-  --accent-soft: #3a1a12;
+  --accent: #b7a1ff;
+  --on-accent: #0b0b0b;
+  --accent-soft: #24212f;
   --focus-ring: var(--accent);
   --overlay: #000000a6;
   --shadow-float: 0 2px 4px 0 #00000080;

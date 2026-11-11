@@ -333,8 +333,9 @@
   .outcomes { grid-template-columns: 1fr; }
 }
 
-/* ── SplitSection: text and accordions left, one image well right ── */
-.splitText { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+/* ── SplitSection: intro on top; accordions left, one image well right ── */
+.splitIntro { max-width: var(--measure); }
+.split { margin-top: var(--space-4); display: flex; flex-direction: column; gap: var(--space-5); }
 .splitStage {
   position: relative;
   width: 100%;
@@ -354,10 +355,9 @@
     column-gap: var(--space-7);
     align-items: start;
   }
-  .splitStage { position: sticky; top: var(--case-top); }
 }
 
-.accordion { margin-top: var(--space-2); border-top: 1px solid var(--hairline); }
+.accordion { border-top: 1px solid var(--hairline); }
 .accItem { border-bottom: 1px solid var(--hairline); }
 .accHeading { margin: 0; }
 .accButton {
