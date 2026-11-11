@@ -27,7 +27,7 @@ export function Sidebar() {
 
         <div className={styles.actions}>
           <Button href={`mailto:${site.email}`}>Email me</Button>
-          <Button href={site.linkedin} target="_blank" rel="noreferrer" variant="ghost">
+          <Button href={site.linkedin} target="_blank" rel="noreferrer" variant="secondary">
             LinkedIn
           </Button>
         </div>
