@@ -1,4 +1,4 @@
-import { Avatar, Button, IconButton, ThemeToggle } from "@/components/ui";
+import { Avatar, Button, ThemeToggle } from "@/components/ui";
 import { site } from "@/content/site";
 import styles from "./Sidebar.module.css";
 
@@ -27,15 +27,9 @@ export function Sidebar() {
 
         <div className={styles.actions}>
           <Button href={`mailto:${site.email}`}>Email me</Button>
-          <IconButton
-            icon="linkedin"
-            label="LinkedIn"
-            href={site.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            filled
-            className={styles.iconAction}
-          />
+          <Button href={site.linkedin} target="_blank" rel="noreferrer" className={styles.linkedin}>
+            LinkedIn
+          </Button>
         </div>
       </div>
 

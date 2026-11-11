@@ -20,8 +20,9 @@
 .intro { display: flex; flex-direction: column; gap: var(--space-3); }
 .bio { max-width: 42ch; }
 .actions { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
-/* Match the 40px primary button beside it. */
-.iconAction { width: var(--control-h); height: var(--control-h); }
+/* LinkedIn's own blue, same in both themes. White text holds 5.7:1 (hover 10:1). */
+.actions .linkedin { background: #0a66c2; color: #fff; }
+.actions .linkedin:hover { background: #004182; }
 
 @media (max-width: 959px) {
   .side {
