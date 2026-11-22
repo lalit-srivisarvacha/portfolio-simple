@@ -196,6 +196,8 @@
   font-size: 15px;
   line-height: 25px;
   letter-spacing: 0;
+  /* While the card bows on scroll (ScrollBow), the chip rides its left edge. */
+  transform: translateX(var(--bow-x, 0px));
 }
 .lds-card__product {
   min-width: 0;
