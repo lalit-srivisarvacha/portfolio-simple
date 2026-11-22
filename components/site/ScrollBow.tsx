@@ -11,43 +11,57 @@ const GAIN = 0.8;
 /** How fast the bow follows the scroll speed, per frame (0 to 1). */
 const FOLLOW = 0.16;
 
+/** Height of the chip's middle above the card's bottom edge, in px. */
+const CHIP_RISE = 28;
+
 type Card = { el: HTMLElement; w: number; h: number; r: number; on: boolean };
 
 /**
- * A card outline whose sides are parabolas: the top and bottom rows sit `d` px to the
- * side of the middle row, so the card bows right (d > 0) or left (d < 0). The whole
- * outline stays inside the card's own box, which is what clip-path can paint.
+ * The slice of the column's one curve that falls on a card. The curve is a parabola
+ * over the viewport's height: a row at the middle of the screen stays put and rows at
+ * the top and bottom sit `d` px to the side, so the whole stack bows right (d > 0) or
+ * left (d < 0) as one shape. `top` is the card's top in the viewport and `vh` the
+ * viewport height. The outline stays inside the card's own box, which is all clip-path
+ * can paint, so the card gives up |d| px of width while it moves.
  */
-function bowPath(w: number, h: number, r: number, d: number) {
+function bowPath(w: number, h: number, r: number, d: number, top: number, vh: number) {
   const s = Math.abs(d);
-  // x of the left and right edges at the middle row
+  const half = vh / 2;
+  // viewport row (-1 top … 1 bottom) of the card's top, its sides' ends, and its bottom
+  const t0 = (top - half) / half;
+  const tA = (top + r - half) / half;
+  const tB = (top + h - r - half) / half;
+  const t1 = (top + h - half) / half;
+  // x of the left and right edges at the middle of the screen
   const aL = d > 0 ? 0 : s;
-  const aR = d > 0 ? w - s : w;
-  // the sides run between the corner radii: rows -u … u of the -1 … 1 height
-  const u = 1 - (2 * r) / h;
-  const end = d * u * u; // side's offset where it meets a corner
-  const corner = d * (2 * u - u * u); // where the side's tangent meets the top/bottom
-  const ctrl = -d * u * u; // control point offset for the side's parabola
+  const aR = aL + w - s;
+  const endA = d * tA * tA; // side's offset where it meets the top corner
+  const endB = d * tB * tB; // … and the bottom corner
+  const ctrl = d * tA * tB; // control point of the side's parabola
+  const cornerA = d * tA * t0; // where the side's tangent meets the top edge
+  const cornerB = d * tB * t1; // … and the bottom edge
   const f = (n: number) => n.toFixed(2);
   return (
-    `path("M${f(aL + corner + r)} 0` +
-    `L${f(aR + corner - r)} 0` +
-    `Q${f(aR + corner)} 0 ${f(aR + end)} ${f(r)}` +
-    `Q${f(aR + ctrl)} ${f(h / 2)} ${f(aR + end)} ${f(h - r)}` +
-    `Q${f(aR + corner)} ${f(h)} ${f(aR + corner - r)} ${f(h)}` +
-    `L${f(aL + corner + r)} ${f(h)}` +
-    `Q${f(aL + corner)} ${f(h)} ${f(aL + end)} ${f(h - r)}` +
-    `Q${f(aL + ctrl)} ${f(h / 2)} ${f(aL + end)} ${f(r)}` +
-    `Q${f(aL + corner)} 0 ${f(aL + corner + r)} 0Z")`
+    `path("M${f(aL + cornerA + r)} 0` +
+    `L${f(aR + cornerA - r)} 0` +
+    `Q${f(aR + cornerA)} 0 ${f(aR + endA)} ${f(r)}` +
+    `Q${f(aR + ctrl)} ${f(h / 2)} ${f(aR + endB)} ${f(h - r)}` +
+    `Q${f(aR + cornerB)} ${f(h)} ${f(aR + cornerB - r)} ${f(h)}` +
+    `L${f(aL + cornerB + r)} ${f(h)}` +
+    `Q${f(aL + cornerB)} ${f(h)} ${f(aL + endB)} ${f(h - r)}` +
+    `Q${f(aL + ctrl)} ${f(h / 2)} ${f(aL + endA)} ${f(r)}` +
+    `Q${f(aL + cornerA)} 0 ${f(aL + cornerA + r)} 0Z")`
   );
 }
 
 /**
- * Home page scroll feel: the page eases toward where you scrolled (Lenis), and each
- * project card bows sideways with the scroll's speed and direction, settling flat when
- * the scroll stops. Only the card's outline moves; the chip rides the edge so it is
- * never cut, and the product shot stays flat. Skipped for reduced motion and for
- * touch screens, which keep native scrolling.
+ * Home page scroll feel: the page eases toward where you scrolled (Lenis), and the
+ * stack of project cards bows sideways as one shape with the scroll's speed and
+ * direction, settling flat when the scroll stops. The curve belongs to the screen, not
+ * to each card: cards pass through it, so one near the top or bottom leans while one in
+ * the middle stays upright. The chip and the product shot ride the curve at their own
+ * height and are never cut. Skipped for reduced motion and for touch screens, which
+ * keep native scrolling.
  */
 export function ScrollBow({ target = ".lds-card" }: { target?: string }) {
   useEffect(() => {
@@ -94,6 +108,7 @@ export function ScrollBow({ target = ".lds-card" }: { target?: string }) {
         for (const c of cards) {
           c.el.style.clipPath = "";
           c.el.style.removeProperty("--bow-x");
+          c.el.style.removeProperty("--bow-mid");
         }
         flat = true;
       };
@@ -109,11 +124,19 @@ export function ScrollBow({ target = ".lds-card" }: { target?: string }) {
           if (!flat) clear();
         } else {
           flat = false;
+          const vh = window.innerHeight;
+          const half = vh / 2;
+          const base = bow > 0 ? 0 : -bow;
+          // Left edge's offset at a viewport y.
+          const edge = (y: number) => base + bow * ((y - half) / half) ** 2;
           for (const c of cards) {
             if (!c.on || !c.w || !c.h) continue;
-            c.el.style.clipPath = bowPath(c.w, c.h, c.r, bow);
-            // The chip sits near the bottom row, so it moves with the left edge there.
-            c.el.style.setProperty("--bow-x", `${Math.max(0, bow).toFixed(2)}px`);
+            const top = c.el.getBoundingClientRect().top;
+            c.el.style.clipPath = bowPath(c.w, c.h, c.r, bow, top, vh);
+            // The chip follows the left edge at its own height; the shot follows the
+            // card's middle, less half the width the card gave up.
+            c.el.style.setProperty("--bow-x", `${edge(top + c.h - CHIP_RISE).toFixed(2)}px`);
+            c.el.style.setProperty("--bow-mid", `${(edge(top + c.h / 2) - Math.abs(bow) / 2).toFixed(2)}px`);
           }
         }
         frame = requestAnimationFrame(tick);
