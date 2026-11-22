@@ -1,4 +1,5 @@
 import { ProjectCard } from "@/components/ui";
+import { ScrollBow } from "@/components/site/ScrollBow";
 import { Sidebar } from "@/components/site/Sidebar";
 import { projects } from "@/content/site";
 import styles from "./page.module.css";
@@ -6,6 +7,7 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <div className={styles.home}>
+      <ScrollBow />
       <Sidebar />
       <main className={styles.work} id="work" aria-label="Selected work">
         {projects.map((p, i) => (
